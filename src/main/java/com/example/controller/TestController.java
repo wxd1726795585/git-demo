@@ -1,23 +1,22 @@
 package com.example.controller;
 
-import com.example.bean.OnsetData;
 import com.example.docx.WordTemplate;
 import com.example.utils.PdfUtils;
+import com.service.TestService;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.poi.wp.usermodel.Paragraph;
 import org.apache.poi.xwpf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.io.*;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
-import java.util.stream.Collectors;
 
 
 @RestController
@@ -26,10 +25,13 @@ import java.util.stream.Collectors;
 public class TestController {
     @Autowired
     private StringRedisTemplate template;
+    @Autowired(required = false)
+    private TestService testService;
     @PostMapping("/test006")
-    public void testDemo001(@RequestBody List<String> list){
-        System.out.println(list);
+    public void testDemo001(@RequestParam("date")Date date){
+        System.out.println(date);
     }
+
 
     @GetMapping("/demo01")
     public void testDemo() throws Exception{
@@ -150,4 +152,12 @@ public class TestController {
         }
     }
 
+}
+@Data
+class Test006{
+    /**
+     * 交易月份
+     */
+    @DateTimeFormat(pattern = "yyyy-MM")
+    private Date occurMonth;
 }
