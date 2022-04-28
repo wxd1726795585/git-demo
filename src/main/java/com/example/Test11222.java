@@ -3,6 +3,11 @@ package com.example;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.Period;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -14,8 +19,10 @@ import java.util.Date;
  */
 public class Test11222 {
     public static void main(String[] args) {
-        System.out.println( getFirstDayDateOfMonth(new Date()));
-        System.out.println(getLastDayOfMonth(new Date()));
+        String str="2021-03-01";
+        String str1="2021-03-31";
+        int i = diffDays(str.split("-"), str1.split("-"));
+        System.out.println(i);
     }
 
     /**
@@ -45,9 +52,69 @@ public class Test11222 {
     }
     @Test
     public void test001(){
-        BigDecimal bigDecimal = new BigDecimal("10");
-        BigDecimal bigDecimal1 = new BigDecimal("11");
-        BigDecimal bigDecimal2 = new BigDecimal("10");
-        System.out.println(bigDecimal.compareTo(bigDecimal1));
+        //当前日期是202205
+        int i=50;
+        String str="202205";
+        ArrayList<String> strings = new ArrayList<>(i);
+        //现存当前的年月
+        strings.add(str);
+        for (int j = 0; j < i-1; j++) {
+            String s1 = strings.get(j);
+            if (s1.substring(4,6).equals("01")){
+                String substring = s1.substring(0, 4);
+                Integer integer = Integer.valueOf(substring);
+                integer=integer-1;
+                strings.add(String.valueOf(integer)+"12");
+                continue;
+            }
+            //不是特殊情况
+            Integer integer1 = Integer.valueOf(s1);
+            String s = String.valueOf(integer1 - 1);
+            strings.add(s);
+            continue;
+        }
+        //
+        System.out.println(strings);
     }
+
+    public static int diffDays(String[] beginDate, String[] endDate) {
+        LocalDate begin = LocalDate.of(Integer.valueOf(beginDate[0]), Integer.valueOf(beginDate[1]), Integer.valueOf(beginDate[2]));
+        LocalDate end = LocalDate.of(Integer.valueOf(endDate[0]), Integer.valueOf(endDate[1]), Integer.valueOf(endDate[2]));
+        Period period = Period.between(begin, end);
+
+        return period.getDays();
+    }
+    public static Date addDays(Date beginDate, int days) {
+        Date endDate = new Date();
+        long end = beginDate.getTime() + 1000 * 60 * 60 * 24 * days;
+        endDate.setTime(end);
+        return endDate;
+    }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

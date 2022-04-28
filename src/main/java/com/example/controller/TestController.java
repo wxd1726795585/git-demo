@@ -1,6 +1,10 @@
 package com.example.controller;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.example.docx.WordTemplate;
+import com.example.req.HealthAssessmentItemDto;
+import com.example.req.HealthAssessmentReq;
 import com.example.utils.PdfUtils;
 import com.service.TestService;
 import lombok.Data;
@@ -9,13 +13,12 @@ import org.apache.poi.xwpf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.*;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.CountDownLatch;
 
 
@@ -27,9 +30,15 @@ public class TestController {
     private StringRedisTemplate template;
     @Autowired(required = false)
     private TestService testService;
-    @PostMapping("/test006")
-    public void testDemo001(@RequestParam("date")Date date){
-        System.out.println(date);
+    @GetMapping("/test006")
+    public void testDemo001(HealthAssessmentReq healthAssessmentReq){
+        String assessmentItemList = healthAssessmentReq.getAssessmentItemList();
+        List list = new ArrayList();
+        String s = JSONArray.toJSONString(assessmentItemList);
+        List<HealthAssessmentItemDto> healthAssessmentItemDtos = JSONObject.parseArray(s, HealthAssessmentItemDto.class);
+
+
+        System.out.println(healthAssessmentItemDtos);
     }
 
 
