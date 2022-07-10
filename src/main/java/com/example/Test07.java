@@ -1,7 +1,11 @@
 package com.example;
 
 import lombok.AllArgsConstructor;
+import org.junit.Test;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -20,18 +24,17 @@ public class Test07 {
      */
     private static Pattern NUMBER_PATTERN = Pattern.compile("-?[0-9]+(\\.[0-9]+)?");
 
-    public static void main(String[] args) {
-        ArrayList<Student002> demo008s = new ArrayList<>();
-        demo008s.add(new Student002("张三",1));
-        demo008s.add(new Student002("李四a",5));
-        demo008s.add(new Student002("王五",2));
-        demo008s.add(new Student002("赵六",10));
+    public static void main(String[] args) throws IOException {
+        FileInputStream inputStream = new FileInputStream("D:\\a\\a.txt");
+        int read = inputStream.read();
 
     }
 
 
+    @Test
+    public void demo001(){
 
-
+    }
     /**
      * 利用正则表达式来判断字符串是否为数字
      */

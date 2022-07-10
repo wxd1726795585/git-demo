@@ -1,10 +1,7 @@
 package com.example.controller;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.example.docx.WordTemplate;
-import com.example.req.HealthAssessmentItemDto;
-import com.example.req.HealthAssessmentReq;
+import com.example.utils.ExportExcelUtil;
 import com.example.utils.PdfUtils;
 import com.service.TestService;
 import lombok.Data;
@@ -17,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
@@ -27,18 +25,121 @@ import java.util.concurrent.CountDownLatch;
 @RequestMapping("/test")
 public class TestController {
     @Autowired
-    private StringRedisTemplate template;
+    private StringRedisTemplate redisTemplate;
     @Autowired(required = false)
     private TestService testService;
+
+    @GetMapping("/demo02")
+    public void demo01(HttpServletResponse response)throws Exception{
+        //2022-07-08 练习redis的常用api
+        //-------------String类型的
+        /*redisTemplate.opsForValue().set("name","wangxiangdong");
+        String name = redisTemplate.opsForValue().get("name");
+        log.info("获取name的值:{}",name);
+        //批量插入
+        HashMap<String, String> map = new HashMap<>();
+        map.put("gender","男");
+        map.put("age","24");
+        redisTemplate.opsForValue().multiSet(map);
+        log.info("获取gender值:{},获取年龄的值:{}",redisTemplate.opsForValue().get("gender"),redisTemplate.opsForValue().get("age"));
+        //插入时候判断是否有该值  没有则插入 返回true 有则返回false
+        Boolean name1 = redisTemplate.opsForValue().setIfAbsent("name", "1");
+        System.out.println(name1);
+        //自增 或者 自减
+        redisTemplate.opsForValue().set("decrement","10");
+        redisTemplate.opsForValue().set("increment","10");
+        redisTemplate.opsForValue().decrement("decrement");
+        redisTemplate.opsForValue().increment("decrement");
+
+
+        //-----------List类型的
+        //往左边插入数据
+        redisTemplate.opsForList().leftPush("test","1");
+        //往右边插入数据
+        redisTemplate.opsForList().rightPush("test","2");
+        //往左边批量插入数据
+        redisTemplate.opsForList().leftPushAll("test","3","4","5");
+        redisTemplate.opsForList().leftPushAll("test",Arrays.asList("6","7","8"));
+        //往右边批量插入数据
+        redisTemplate.opsForList().rightPushAll("test","10","11","12");
+        redisTemplate.opsForList().rightPushAll("test",Arrays.asList("13","14","15"));
+        //弹出左边的第一个数据
+        String leftPop = redisTemplate.opsForList().leftPop("test");
+        log.info("弹出左边的第一个数据:{}",leftPop);
+        //弹出右边的第一个数据
+        String rightPop = redisTemplate.opsForList().rightPop("test");
+        log.info("弹出右边的第一个数据:{}",rightPop);
+        //获取list集合长度
+        redisTemplate.opsForList().size("test");
+
+        //-----------Hash类型的
+        //插入数据
+        redisTemplate.opsForHash().put("hash","name","王祥栋");
+        //获取数据
+        String hashName =(String) redisTemplate.opsForHash().get("hash", "name");
+        log.info("获取的name名称:{}",hashName);
+        //批量插入数据
+        HashMap<String, String> map1 = new HashMap<>();
+        map1.put("gender","男");
+        map1.put("age","24");
+        redisTemplate.opsForHash().putAll("hash",map1);
+        //获取长度
+        Long hash = redisTemplate.opsForHash().size("hash");
+        log.info("hash的长度:{}",hash);
+        //获取所有的键值对
+        Map<Object, Object> hash1 = redisTemplate.opsForHash().entries("hash");
+        log.info("获取所有的键值对:{}",hash1);
+        //获取所有的KEY值
+        Set<Object> hash2 = redisTemplate.opsForHash().keys("hash");
+        log.info("获取所有的KEY值:{}",hash2);
+        //获取所有的value值
+        List<Object> hash3 = redisTemplate.opsForHash().values("hash");
+        log.info("获取所有的value值:{}",hash3);*/
+        //redisTemplate.opsForValue().set("test","10");
+        redisTemplate.opsForValue().decrement("test");
+    }
     @GetMapping("/test006")
-    public void testDemo001(HealthAssessmentReq healthAssessmentReq){
-        String assessmentItemList = healthAssessmentReq.getAssessmentItemList();
-        List list = new ArrayList();
-        String s = JSONArray.toJSONString(assessmentItemList);
-        List<HealthAssessmentItemDto> healthAssessmentItemDtos = JSONObject.parseArray(s, HealthAssessmentItemDto.class);
+    public void testDemo001(HttpServletResponse response)throws Exception{
+        /*HashMap<String, Object> map = new HashMap<>();
+        //商户名称
+        map.put("cooperatorName","a");
+        //行业类别
+        map.put("industryCategory","a");
+        //业务覆盖省份
+        map.put("businessCoverageProvinces","a");
+        //公司在职员工数
+         map.put("companyEmployees","");
 
 
-        System.out.println(healthAssessmentItemDtos);
+        //公司年收入规模
+        map.put("income","c");
+        //公司网址/APP
+        map.put("companyWebSite","web");
+        //自由职业者岗位
+        map.put("freelanceJobs","f");
+        //场景描述
+        map.put("sceneDesc","s");
+        //开票内容
+        map.put("invoiceContent","i");
+        //工作地点
+        map.put("workerPlace","word");
+        //单人单月月收入范围
+        map.put("monthIncomeRange","最高单人单月不超过100");
+        //自由职业者数量
+            map.put("numberOfFreelancers","");
+        //单月总下发额
+            map.put("totalMonthlyPayment","");
+        //费用发放周期
+            map.put("expenseReleaseCycle","");
+        //真实性证明
+            map.put("expenseReleaseCycle1","");
+        TemplateExcelUtils.downLoadExcel("测试数据", "a.xls", map, response);*/
+        ExportExcelUtil export = new ExportExcelUtil();
+        String srcFilePath = "d:/hezuopinggu.xlsx";
+        String fileName = "test_" + System.currentTimeMillis() + ".xlsx";
+        String desFilePath = "d:/" + fileName;
+        export.exportExcel(srcFilePath, desFilePath,response);
+
     }
 
 
