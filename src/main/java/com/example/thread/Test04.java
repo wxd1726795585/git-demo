@@ -27,6 +27,7 @@ public class Test04 implements Runnable{
         try {
             synchronized (object){
                 object.wait();
+                System.out.println("大家好啊");
             }
         }catch (Exception e){
 
