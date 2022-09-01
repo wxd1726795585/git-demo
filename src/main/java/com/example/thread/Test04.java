@@ -51,4 +51,5 @@ class Student{
     private String name;
     private String age;
     private int test;
+    private int test001;
 }
