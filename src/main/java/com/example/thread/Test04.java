@@ -50,4 +50,5 @@ public class Test04 implements Runnable{
 class Student{
     private String name;
     private String age;
+    private int test;
 }
