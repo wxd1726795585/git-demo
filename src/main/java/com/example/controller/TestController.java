@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
 
@@ -31,6 +32,10 @@ public class TestController {
 
     @GetMapping("/demo02")
     public void demo01(HttpServletResponse response)throws Exception{
+        redisTemplate.opsForHash().put("a","b",String.valueOf(1112.550));
+        String o = (String) redisTemplate.opsForHash().get("a", "b");
+        BigDecimal bigDecimal = new BigDecimal(o);
+        System.out.println(bigDecimal);
         //2022-07-08 练习redis的常用api
         //-------------String类型的
         /*redisTemplate.opsForValue().set("name","wangxiangdong");
@@ -96,7 +101,6 @@ public class TestController {
         List<Object> hash3 = redisTemplate.opsForHash().values("hash");
         log.info("获取所有的value值:{}",hash3);*/
         //redisTemplate.opsForValue().set("test","10");
-        redisTemplate.opsForValue().decrement("test");
     }
     @GetMapping("/test006")
     public void testDemo001(HttpServletResponse response)throws Exception{
