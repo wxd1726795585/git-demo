@@ -1,9 +1,14 @@
 package com.example;
 
+import com.example.collect.utils.DateUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.junit.Test;
 
+import javax.xml.crypto.Data;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -63,6 +68,14 @@ public class Test06 {
             return false;
         }
         return true;
+    }
+    @Test
+    public void test(){
+        Date date = new Date();
+        String s = DateUtils.dateToString(date, 1);
+        String s1 = DateUtils.dateToString(date, 2);
+        System.out.println(s);
+        System.out.println(s1);
     }
 
 }
