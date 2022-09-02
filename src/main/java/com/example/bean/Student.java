@@ -2,6 +2,8 @@ package com.example.bean;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 /**
  * \* Created with WXD.
  * \* Date:  2022/9/2
@@ -17,7 +19,7 @@ public class Student {
     /**
      * 年龄
      */
-    private int age;
+    private BigDecimal age;
     /**
      * 身份证号码
      */
