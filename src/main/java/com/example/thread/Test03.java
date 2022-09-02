@@ -26,7 +26,7 @@ public class Test03 implements Callable {
             Integer integer = futureTask.get();
             System.out.println(integer+"————获取到的结果......");
         }catch (Exception e){
-
+            System.out.println(e);
         }
     }
 }
