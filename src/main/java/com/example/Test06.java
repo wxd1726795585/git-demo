@@ -9,6 +9,9 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,20 +21,20 @@ import java.util.regex.Pattern;
  * \* Description:
  * \* @author 王祥栋
  */
-public class Test06 {
+public class Test06 implements Callable {
+
 
     /**
      * 校验数字的正则表达式
      */
     private static Pattern NUMBER_PATTERN = Pattern.compile("-?[0-9]+(\\.[0-9]+)?");
-    public static void main(String[] args) {
-        String str="1.05565656.5";
-        if (checkStrIsNum02(str)&&1==new BigDecimal(str).compareTo(BigDecimal.ZERO)){
-            System.out.println("是正数");
-        }else {
-            System.out.println("不是正数");
-        }
-
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
+        Test06 test06 = new Test06();
+        FutureTask futureTask = new FutureTask<>(test06);
+        Thread thread = new Thread(futureTask);
+        thread.start();
+        Object o = futureTask.get();
+        System.out.println(o);
     }
 
     /**
@@ -78,4 +81,9 @@ public class Test06 {
         System.out.println(s1);
     }
 
+    @Override
+    public Integer call() throws Exception {
+        System.out.println(Thread.currentThread().getName()+"启动子线程");
+        return 1;
+    }
 }

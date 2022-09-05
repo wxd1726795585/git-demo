@@ -25,8 +25,7 @@ public class Test07 {
     private static Pattern NUMBER_PATTERN = Pattern.compile("-?[0-9]+(\\.[0-9]+)?");
 
     public static void main(String[] args) throws IOException {
-        FileInputStream inputStream = new FileInputStream("D:\\a\\a.txt");
-        int read = inputStream.read();
+
 
     }
 
