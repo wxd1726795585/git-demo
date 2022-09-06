@@ -18,13 +18,27 @@ public class TestDemo {
     private StringRedisTemplate redisTemplate;
     @Test
     public void redis(){
-        //联系redis的常用api
-        //String类型的
-        redisTemplate.opsForValue().set("test0708","test0708");
-        System.out.println(redisTemplate.opsForValue().get("test0708"));
-        HashMap<String, String> stringStringHashMap = new HashMap<>();
-        stringStringHashMap.put("1","1");
-        stringStringHashMap.put("2","2");
-        redisTemplate.opsForValue().multiSet(stringStringHashMap);
+        Student006 student006 = new Student006();
+        student006.setName("a");
+        System.out.println(student006.getName());
+
+    }
+}
+class Student006{
+      String name;
+      protected Student006(){
+
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        name = name;
+    }
+
+    public Student006(int i){
+
     }
 }

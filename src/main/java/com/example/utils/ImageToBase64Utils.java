@@ -1,6 +1,6 @@
+/*
 package com.example.utils;
 
-import sun.misc.BASE64Encoder;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
@@ -28,11 +28,13 @@ public class ImageToBase64Utils {
         System.out.println(imageToBase64);
     }
 
-    /**
+    */
+/**
      * 网络图片转换Base64的方法
      *
      * @param netImagePath
-     */
+     *//*
+
     public static String NetImageToBase64(String netImagePath) {
         final ByteArrayOutputStream data = new ByteArrayOutputStream();
         try {
@@ -67,12 +69,14 @@ public class ImageToBase64Utils {
     }
 
 
-    /**
+    */
+/**
      * 本地图片转换Base64的方法
      *
      * @param imgPath
      * @return
-     */
+     *//*
+
 
     public static String LocalImageToBase64(String imgPath) {
         byte[] data = null;
@@ -93,4 +97,4 @@ public class ImageToBase64Utils {
         return strLocalImageToBase64;
     }
 }
- 
+ */
