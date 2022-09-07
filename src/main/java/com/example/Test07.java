@@ -1,6 +1,9 @@
 package com.example;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import lombok.AllArgsConstructor;
+import net.sf.json.JSONObject;
 import org.junit.Test;
 
 import java.io.FileInputStream;
@@ -8,8 +11,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * \* Created with WXD.
@@ -25,7 +33,6 @@ public class Test07 {
     private static Pattern NUMBER_PATTERN = Pattern.compile("-?[0-9]+(\\.[0-9]+)?");
 
     public static void main(String[] args) throws IOException {
-
 
     }
 

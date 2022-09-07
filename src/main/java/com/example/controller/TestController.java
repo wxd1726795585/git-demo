@@ -6,6 +6,7 @@ import com.example.collect.utils.ExcelUtils;
 import com.example.docx.WordTemplate;
 import com.example.utils.ExportExcelUtil;
 import com.example.utils.PdfUtils;
+import com.example.utils.RedisLock;
 import com.service.TestService;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -14,10 +15,7 @@ import org.apache.poi.xwpf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -33,15 +31,12 @@ import java.util.concurrent.CountDownLatch;
 public class TestController {
     @Autowired
     private StringRedisTemplate redisTemplate;
+
     @Autowired(required = false)
     private TestService testService;
     @GetMapping("import/excel")
-    public void demo06(@RequestPart(value = "file")MultipartFile multipartFile) throws Exception {
-        if (null==multipartFile || StringUtils.isBlank(multipartFile.getOriginalFilename())){
-            throw new BusinessException("输入文件不正确");
-        }
-        List<Student> students1 = ExcelUtils.importExcelOld(multipartFile, 1, Student.class);
-        System.out.println(students1);
+    public void demo06(@RequestParam("name")String name) throws Exception {
+        testService.demo07(name);
     }
 
 

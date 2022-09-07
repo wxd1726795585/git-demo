@@ -11,4 +11,6 @@ public interface TestService {
      * 测试demo
      */
     void demo01();
+
+    void demo07(String name);
 }
