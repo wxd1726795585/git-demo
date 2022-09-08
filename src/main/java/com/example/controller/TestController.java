@@ -35,8 +35,9 @@ public class TestController {
     @Autowired(required = false)
     private TestService testService;
     @GetMapping("import/excel")
-    public void demo06(@RequestParam("name")String name) throws Exception {
-        testService.demo07(name);
+    public void demo06(@RequestParam("list")List<String> name) throws Exception {
+        System.out.println(name);
+        testService.asyncPool();
     }
 
 

@@ -6,6 +6,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.TreeSet;
 
 /**
  * \* Created with WXD.
@@ -16,15 +17,17 @@ import java.util.HashMap;
 public class TestDemo {
     @Autowired
     private StringRedisTemplate redisTemplate;
+
+    public static void main(String[] args) {
+        TreeSet<Object> objects = new TreeSet<>();
+        objects.add("aaa");
+        objects.add("bbb");
+        //objects.add(111);
+        boolean aaa = objects.contains("aaa");
+        System.out.println(aaa);
+    }
     @Test
-    public void redis(){
-        //联系redis的常用api
-        //String类型的
-        redisTemplate.opsForValue().set("test0708","test0708");
-        System.out.println(redisTemplate.opsForValue().get("test0708"));
-        HashMap<String, String> stringStringHashMap = new HashMap<>();
-        stringStringHashMap.put("1","1");
-        stringStringHashMap.put("2","2");
-        redisTemplate.opsForValue().multiSet(stringStringHashMap);
+    public static void redis(){
+
     }
 }

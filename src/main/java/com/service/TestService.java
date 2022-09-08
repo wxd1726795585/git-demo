@@ -13,4 +13,7 @@ public interface TestService {
     void demo01();
 
     void demo07(String name);
+
+    void asyncPool();
+
 }
