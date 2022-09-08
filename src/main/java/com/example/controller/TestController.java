@@ -4,6 +4,7 @@ import com.example.base.BusinessException;
 import com.example.bean.Student;
 import com.example.collect.utils.ExcelUtils;
 import com.example.docx.WordTemplate;
+import com.example.req.PersonReq;
 import com.example.utils.ExportExcelUtil;
 import com.example.utils.PdfUtils;
 import com.example.utils.RedisLock;
@@ -39,6 +40,13 @@ public class TestController {
         System.out.println(name);
         testService.asyncPool();
     }
+    @GetMapping("/testDemo")
+    public void testDemo01(PersonReq personReq,@RequestParam("aaa")String aaa){
+        //System.out.println(personReq.toString());
+        System.out.println(aaa);
+    }
+
+
 
 
     @GetMapping("/demo02")
