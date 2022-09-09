@@ -14,10 +14,7 @@ import org.apache.poi.xwpf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -42,6 +39,19 @@ public class TestController {
         }
         List<Student> students1 = ExcelUtils.importExcelOld(multipartFile, 1, Student.class);
         System.out.println(students1);
+    }
+
+
+    @GetMapping("/exception")
+    public void testException()  {
+        throw new BusinessException("测试异常");
+    }
+
+
+    @PostMapping("/exceptionDemo")
+    public void testException1(@RequestBody List<String> list,@RequestParam("a")String a)  {
+        System.out.println(list);
+        System.out.println(a);
     }
 
 
