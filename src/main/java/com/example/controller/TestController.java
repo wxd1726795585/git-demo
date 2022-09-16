@@ -4,6 +4,7 @@ import com.example.base.BusinessException;
 import com.example.bean.Student;
 import com.example.collect.utils.ExcelUtils;
 import com.example.docx.WordTemplate;
+import com.example.req.StudentReq;
 import com.example.utils.ExportExcelUtil;
 import com.example.utils.PdfUtils;
 import com.service.TestService;
@@ -14,10 +15,12 @@ import org.apache.poi.xwpf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.io.*;
 import java.math.BigDecimal;
 import java.util.*;
@@ -42,9 +45,12 @@ public class TestController {
     }
 
 
-    @GetMapping("/exception")
-    public void testException()  {
-        throw new BusinessException("测试异常");
+
+    @PostMapping("/exception")
+    public void testException(@RequestBody @Valid StudentReq studentReq, BindingResult bindingResult)  {
+        if (bindingResult.hasErrors()){
+            throw new BusinessException(bindingResult.getAllErrors().get(0).getDefaultMessage());
+        }
     }
 
 
