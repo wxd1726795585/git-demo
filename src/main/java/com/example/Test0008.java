@@ -1,8 +1,10 @@
 package com.example;
 
+import com.example.enums.Season;
 import com.example.utils.PdfUtils;
 
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  * \* Created with WXD.
@@ -12,7 +14,9 @@ import java.io.File;
  */
 public class Test0008{
     public static void main(String[] args) {
-        word2pdf("D:\\jiankang.docx","D:\\a.pdf");
+        File file = new File("D:" + File.separator + "wxd.txt");
+        long length = file.length();
+        System.out.println(length);
 
     }
     private static  void word2pdf(String filePath, String pdfBdUrl) {
