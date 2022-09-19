@@ -2,11 +2,13 @@ package com.example;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.example.req.StudentReq;
 import com.example.utils.DateUtil;
 import com.example.utils.TimeAssist;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
+import org.springframework.beans.BeanUtils;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.lang.reflect.Field;
@@ -46,13 +48,9 @@ public class Test116116 {
 
 
         public static void main(String[] args) {
-            ArrayList<String> strings = new ArrayList<>();
-            strings.add("ccc");
-            strings.add("aaa");
-            strings.add("eee");
-            strings.add("ddd");
-            boolean ccc = strings.remove("ccc");
-            System.out.println(strings);
+            String str="中国任命银行总行";
+            String hang = str.substring(0, str.indexOf("行")+1);
+            System.out.println(hang);
         }
     /**
      * 开票日期格式化

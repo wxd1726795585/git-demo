@@ -1,6 +1,9 @@
 package com.example.req;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.validation.constraints.NotBlank;
 
@@ -12,6 +15,9 @@ import javax.validation.constraints.NotBlank;
  * \* @author 王祥栋
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class StudentReq {
     /**
      * 名字
