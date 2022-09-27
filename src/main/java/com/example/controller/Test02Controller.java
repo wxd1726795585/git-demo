@@ -20,8 +20,16 @@ public class Test02Controller {
     /**
      * 批量增加数据
      */
-    @PostMapping("volume/increase")
+    @PostMapping("/volume/increase")
     public void volumeIncrease() throws InterruptedException {
         test02Service.volumeIncrease();
+    }
+
+    /**
+     * 批量修改数据
+     */
+    @PostMapping("/bulk/changes")
+    public void bulkChanges(){
+        test02Service.bulkChanges();
     }
 }

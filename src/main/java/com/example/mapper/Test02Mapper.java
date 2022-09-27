@@ -22,4 +22,11 @@ public interface Test02Mapper {
      * @return
      */
     int volumeIncrease(@Param("list") List<StudentEntity> list);
+
+    /**
+     * 批量修改数据
+     * @param list
+     * @return
+     */
+    int bulkChanges(List<StudentEntity> list);
 }

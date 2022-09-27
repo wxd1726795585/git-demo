@@ -46,4 +46,30 @@ public class Test02ServiceImpl {
         log.info("总共增加了-{}-条",row);
 
     }
+
+    /**
+     * 批量修改数据
+     */
+    public void bulkChanges() {
+        log.info("批量修改数据...");
+        StudentEntity studentEntity = new StudentEntity();
+        studentEntity.setId("1664263309326");
+        studentEntity.setName("修改数据");
+        studentEntity.setAge(6666666);
+
+        StudentEntity studentEntity02 = new StudentEntity();
+        studentEntity02.setId("1664263309438");
+        studentEntity02.setName("修改数据");
+        studentEntity02.setAge(6666666);
+
+        List<StudentEntity> list=new ArrayList<>();
+        list.add(studentEntity);
+        list.add(studentEntity02);
+
+        int row=test02Mapper.bulkChanges(list);
+        log.info("总共修改了-{}-条",row);
+
+
+
+    }
 }
