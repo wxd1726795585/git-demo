@@ -293,7 +293,35 @@ public class DateUtil {
         return parse;
     }
 
+    /**
+     * 获取Date类型的一天的起始值
+     * @param date
+     * @return
+     * @throws Exception
+     */
+    public static Date getDateTypeBeginDay(Date date) throws Exception{
+        if (date==null){
+            return null;
+        }
+        String format = longSdf.format(date);
+        Date parse = longSdf.parse(format.substring(0, 10) + " 00:00:00");
+        return parse;
+    }
 
+    /**
+     * 获取Date类型的一天的起始值
+     * @param date
+     * @return
+     * @throws Exception
+     */
+    public static Date getDateTypeEndDay(Date date) throws Exception{
+        if (date==null){
+            return null;
+        }
+        String format = longSdf.format(date);
+        Date parse = longSdf.parse(format.substring(0, 10) + " 23:59:59");
+        return parse;
+    }
     public static void main(String[] args) {
 //        Date beginDate = getBeginDateTime("2021-08-29");
 //        Date endDate = getEndDateTime("2021-09-02");

@@ -47,10 +47,9 @@ public class Test116116 {
         String s = date.replaceAll("年", "-").replaceAll("月", "-").replaceAll("日", "").trim();*/
 
 
-        public static void main(String[] args) {
-            String str="中国任命银行总行";
-            String hang = str.substring(0, str.indexOf("行")+1);
-            System.out.println(hang);
+        public static void main(String[] args) throws Exception{
+
+
         }
     /**
      * 开票日期格式化
