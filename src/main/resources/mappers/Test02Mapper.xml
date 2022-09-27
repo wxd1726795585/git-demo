@@ -9,4 +9,11 @@
         name as name
         from student
     </select>
+    <!--批量增加数据-->
+    <insert id="volumeIncrease">
+        insert into student (`name`,`id_card`,`id`,`age`) values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.name},#{item.idCard},#{item.id},#{item.age})
+        </foreach>
+    </insert>
 </mapper>
