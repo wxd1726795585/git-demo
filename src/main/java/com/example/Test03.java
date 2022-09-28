@@ -2,6 +2,10 @@ package com.example;
 
 
 
+import com.example.bean.Student;
+import lombok.extern.slf4j.Slf4j;
+
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -11,18 +15,17 @@ import java.util.Date;
  * \* Date:  2022/2/9
  * \* Description:
  */
+@Slf4j
 public class Test03 {
 
     private final static SimpleDateFormat shortSdf =new SimpleDateFormat("yyyy-MM-dd");;
     private final static SimpleDateFormat longSdf =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");;
 
     public static void main(String[] args) {
-        String string = new String();
-        Date currentYearEndTime = getCurrentYearEndTime();
-        Date currentYearStartTime = getCurrentYearStartTime();
-        String format = longSdf.format(currentYearStartTime);
-        System.out.println(format);
-        Boolean aBoolean = new Boolean(true);
+        Student student = new Student();
+        student.setAge(BigDecimal.ONE);
+        student.setAddress("aaa");
+        log.info("类-{}-",student.toString());
     }
 
     /**
