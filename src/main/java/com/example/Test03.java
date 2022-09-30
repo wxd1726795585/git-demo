@@ -5,10 +5,13 @@ package com.example;
 import com.example.bean.Student;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Properties;
 
 /**
  * \* Created with WXD.
@@ -22,10 +25,8 @@ public class Test03 {
     private final static SimpleDateFormat longSdf =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");;
 
     public static void main(String[] args) {
-        Student student = new Student();
-        student.setAge(BigDecimal.ONE);
-        student.setAddress("aaa");
-        log.info("类-{}-",student.toString());
+        boolean equals = BigDecimal.ZERO.equals(new BigDecimal("0.00000"));
+        System.out.println(equals);
     }
 
     /**
