@@ -25,12 +25,10 @@ public class Test06 {
      */
     private static Pattern NUMBER_PATTERN = Pattern.compile("-?[0-9]+(\\.[0-9]+)?");
     public static void main(String[] args) {
-        String str="1.05565656.5";
-        if (checkStrIsNum02(str)&&1==new BigDecimal(str).compareTo(BigDecimal.ZERO)){
-            System.out.println("是正数");
-        }else {
-            System.out.println("不是正数");
-        }
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String format = simpleDateFormat.format(date);
+        System.out.println(format);
 
     }
 

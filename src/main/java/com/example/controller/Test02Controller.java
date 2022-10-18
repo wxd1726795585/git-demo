@@ -32,4 +32,8 @@ public class Test02Controller {
     public void bulkChanges(){
         test02Service.bulkChanges();
     }
+    @PostMapping("/update/moreData")
+    public void updateMoreData(){
+        test02Service.updateMoreData();
+    }
 }
