@@ -36,4 +36,26 @@
             #{item.id}
         </foreach>
     </update>
+
+
+    <!--批量修改联合主键-->
+    <update id="updateMoreData">
+        update trade_mq_consumer_log
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="consumer_times =case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    when concat(group_name,msg_key,msg_tag)=#{item.lid} then #{item.consumerTimes}
+                </foreach>
+            </trim>
+            <trim prefix="remark =case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    when concat(group_name,msg_key,msg_tag)=#{item.lid} then #{item.remark}
+                </foreach>
+            </trim>
+        </trim>
+        where concat(group_name,msg_key,msg_tag) in
+        <foreach collection="list" index="index" item="item" separator="," open="(" close=")">
+            #{item.lid}
+        </foreach>
+    </update>
 </mapper>

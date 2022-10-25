@@ -1,6 +1,7 @@
 package com.example.impl;
 
 import com.example.entity.StudentEntity;
+import com.example.entity.TradeMqConsumerLog;
 import com.example.mapper.Test02Mapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,7 +75,40 @@ public class Test02ServiceImpl {
     }
 
     public void updateMoreData() {
+        ArrayList<TradeMqConsumerLog> tradeMqConsumerLogs = new ArrayList<>();
+        TradeMqConsumerLog tradeMqConsumerLog = new TradeMqConsumerLog();
+        tradeMqConsumerLog.setGroupName("1");
+        tradeMqConsumerLog.setMsgKey("1");
+        tradeMqConsumerLog.setMsgTag("1");
+        tradeMqConsumerLog.setRemark("一");
+        tradeMqConsumerLog.setConsumerTimes(1);
 
 
+
+        TradeMqConsumerLog tradeMqConsumerLog1 = new TradeMqConsumerLog();
+        tradeMqConsumerLog1.setGroupName("2");
+        tradeMqConsumerLog1.setMsgKey("2");
+        tradeMqConsumerLog1.setMsgTag("2");
+        tradeMqConsumerLog1.setRemark("二");
+        tradeMqConsumerLog1.setConsumerTimes(2);
+
+
+        TradeMqConsumerLog tradeMqConsumerLog2 = new TradeMqConsumerLog();
+        tradeMqConsumerLog2.setGroupName("3");
+        tradeMqConsumerLog2.setMsgKey("3");
+        tradeMqConsumerLog2.setMsgTag("3");
+        tradeMqConsumerLog2.setRemark("三");
+        tradeMqConsumerLog2.setConsumerTimes(3);
+
+        tradeMqConsumerLogs.add(tradeMqConsumerLog);
+        tradeMqConsumerLogs.add(tradeMqConsumerLog1);
+        tradeMqConsumerLogs.add(tradeMqConsumerLog2);
+
+
+        tradeMqConsumerLogs.forEach(x->{
+            x.setLid(x.getGroupName().concat(x.getMsgKey()).concat(x.getMsgTag()));
+        });
+        int i=test02Mapper.updateMoreData(tradeMqConsumerLogs);
+        log.info("总共修改了:{}条数据",i);
     }
 }

@@ -47,10 +47,14 @@ public class TestController {
 
     @GetMapping("/demo02")
     public void demo01(HttpServletResponse response)throws Exception{
-        redisTemplate.opsForHash().put("a","b",String.valueOf(1112.550));
+        String date_test = redisTemplate.opsForValue().get("DATE_TEST");
+        String[] split = date_test.split("~");
+        System.out.println(split[0]);
+        System.out.println(split[1]);
+        /*redisTemplate.opsForHash().put("a","b",String.valueOf(1112.550));
         String o = (String) redisTemplate.opsForHash().get("a", "b");
         BigDecimal bigDecimal = new BigDecimal(o);
-        System.out.println(bigDecimal);
+        System.out.println(bigDecimal);*/
         //2022-07-08 练习redis的常用api
         //-------------String类型的
         /*redisTemplate.opsForValue().set("name","wangxiangdong");

@@ -1,9 +1,11 @@
 package com.example.mapper;
 
 import com.example.entity.StudentEntity;
+import com.example.entity.TradeMqConsumerLog;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,4 +31,11 @@ public interface Test02Mapper {
      * @return
      */
     int bulkChanges(List<StudentEntity> list);
+
+    /**
+     * 批量修改
+     * @param tradeMqConsumerLogs
+     * @return
+     */
+    int updateMoreData(@Param("list") List<TradeMqConsumerLog> tradeMqConsumerLogs);
 }
