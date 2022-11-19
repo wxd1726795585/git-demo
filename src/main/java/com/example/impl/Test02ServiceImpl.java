@@ -1,5 +1,7 @@
 package com.example.impl;
 
+import com.alibaba.fastjson.JSONObject;
+import com.example.entity.CopyEntity;
 import com.example.entity.StudentEntity;
 import com.example.entity.TradeMqConsumerLog;
 import com.example.mapper.Test02Mapper;
@@ -7,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,5 +113,21 @@ public class Test02ServiceImpl {
         });
         int i=test02Mapper.updateMoreData(tradeMqConsumerLogs);
         log.info("总共修改了:{}条数据",i);
+    }
+
+    public void selectDemo(List<String> id) {
+        BigDecimal bigDecimal=test02Mapper.selectDemo(id);
+        System.out.println(bigDecimal);
+    }
+
+    /**
+     * 测试mybatis
+     */
+    public void testMybatis() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("gender","女");
+        String age="14";
+        List<CopyEntity> list=test02Mapper.testMybatis(jsonObject,age);
+        System.out.println(list);
     }
 }

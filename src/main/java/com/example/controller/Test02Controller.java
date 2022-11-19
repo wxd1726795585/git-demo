@@ -4,7 +4,11 @@ import com.example.impl.Test02ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * \* Created with WXD.
@@ -36,4 +40,19 @@ public class Test02Controller {
     public void updateMoreData(){
         test02Service.updateMoreData();
     }
+
+    @PostMapping("/selectDemo")
+    public void selectDemo(@RequestBody List<String> list){
+        test02Service.selectDemo(list);
+    }
+
+
+    @PostMapping("/test/mybatis")
+    public void testMybatis(){
+        test02Service.testMybatis();
+    }
+
+
+
+
 }

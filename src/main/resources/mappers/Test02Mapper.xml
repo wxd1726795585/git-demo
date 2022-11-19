@@ -58,4 +58,28 @@
             #{item.lid}
         </foreach>
     </update>
+
+
+
+    <select id="selectDemo" resultType="java.math.BigDecimal">
+        select sum(d.test119)
+        from dept d
+        where d.id in
+        <foreach collection="list" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+
+    </select>
+
+    <select id="testMybatis" resultType="com.example.entity.CopyEntity">
+        SELECT
+            c.age AS age,
+            c.delete_flag AS deleteFlag,
+            c.gender AS gender,
+            c.id_card AS idCard
+        FROM copy c
+        WHERE c.age=#{age}
+          AND c.gender=#{jsonObject.gender}
+
+    </select>
 </mapper>
