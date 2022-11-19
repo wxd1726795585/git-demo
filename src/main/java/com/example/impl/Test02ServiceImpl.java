@@ -124,6 +124,7 @@ public class Test02ServiceImpl {
      * 测试mybatis
      */
     public void testMybatis() {
+        //测试demo 分支
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("gender","女");
         String age="14";
