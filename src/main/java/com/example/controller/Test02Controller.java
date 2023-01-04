@@ -52,7 +52,32 @@ public class Test02Controller {
         test02Service.testMybatis();
     }
 
+    @PostMapping("/test/selectCount")
+    public void selectCount(@RequestParam("gender")String gender){
+        test02Service.selectCount(gender);
+    }
+
+
+
 
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

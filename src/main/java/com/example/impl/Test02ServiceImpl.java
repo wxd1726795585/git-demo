@@ -131,4 +131,12 @@ public class Test02ServiceImpl {
         List<CopyEntity> list=test02Mapper.testMybatis(jsonObject,age);
         System.out.println(list);
     }
+
+    /**
+     * 查询测试
+     */
+    public void selectCount(String gender) {
+        Integer count = test02Mapper.selectCount(gender);
+        log.info("个数-{}-",count);
+    }
 }

@@ -6,6 +6,8 @@ import lombok.ToString;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
 import java.util.stream.Collectors;
@@ -19,9 +21,7 @@ import java.util.stream.Collectors;
 @SpringBootTest
 public class Test0009 {
     public static void main(String[] args) {
-        String str="a";
-        int a = str.lastIndexOf('a');
-        System.out.println(a);
+
     }
     @Test
     public void test001(){

@@ -46,13 +46,22 @@ public class Test116116 {
 
 
         public static void main(String[] args) {
-            ArrayList<String> strings = new ArrayList<>();
-            strings.add("ccc");
-            strings.add("aaa");
-            strings.add("eee");
-            strings.add("ddd");
-            boolean ccc = strings.remove("ccc");
-            System.out.println(strings);
+            HashMap<Object, Object> hashMap = new HashMap<>();
+            hashMap.put("test","001");
+            hashMap.put("test1","002");
+            hashMap.put("test2","003");
+            Set<Object> set = hashMap.keySet();
+            set.forEach(x->{
+                System.out.println("key为:"+x+"value为:"+hashMap.get(x));
+            });
+            Collection<Object> values = hashMap.values();
+            System.out.println(values);
+            Set<Map.Entry<Object, Object>> entries = hashMap.entrySet();
+            for (Map.Entry entry:
+                 entries) {
+                System.out.println("key:"+entry.getKey()+"value:"+entry.getValue());
+            }
+
         }
     /**
      * 开票日期格式化

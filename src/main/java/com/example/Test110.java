@@ -24,12 +24,8 @@ public class Test110 {
     private StringRedisTemplate stringRedisTemplate;
 
     public static void main(String[] args) {
-        Test66666 test66666 = new Test66666();
-        test66666.setAge("16");
-        test66666.setName("王祥栋");
-        Test77777 test77777 = new Test77777();
-        BeanUtils.copyProperties(test66666,test77777);
-        System.out.println(test77777);
+        //victory ->+1
+
     }
 
     /**

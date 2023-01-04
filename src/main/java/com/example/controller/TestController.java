@@ -1,9 +1,11 @@
 package com.example.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.example.base.BusinessException;
 import com.example.bean.Student;
 import com.example.collect.utils.ExcelUtils;
 import com.example.docx.WordTemplate;
+import com.example.req.InvoiceApprovalReq;
 import com.example.utils.ExportExcelUtil;
 import com.example.utils.PdfUtils;
 import com.service.TestService;
@@ -14,10 +16,7 @@ import org.apache.poi.xwpf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -121,6 +120,16 @@ public class TestController {
         log.info("获取所有的value值:{}",hash3);*/
         //redisTemplate.opsForValue().set("test","10");
     }
+    @PostMapping("/test008")
+    public void testDemo008(String topic, String tag, String paramJsonStr){
+        log.info("手动发送MQ，Topic：{}，Tag：{}，Param：{}", topic, tag, paramJsonStr);
+        InvoiceApprovalReq invoiceApprovalReq = JSON.parseObject(paramJsonStr, InvoiceApprovalReq.class);
+
+        log.info("内容体:-{}-",invoiceApprovalReq);
+    }
+
+
+
     @GetMapping("/test006")
     public void testDemo001(HttpServletResponse response)throws Exception{
         /*HashMap<String, Object> map = new HashMap<>();

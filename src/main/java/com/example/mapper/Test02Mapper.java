@@ -52,4 +52,9 @@ public interface Test02Mapper {
      */
     List<CopyEntity> testMybatis(@Param("jsonObject") JSONObject jsonObject, @Param("age") String age);
 
+    /**
+     * 查询总条数
+     * @return
+     */
+    Integer selectCount(@Param("gender")String gender);
 }

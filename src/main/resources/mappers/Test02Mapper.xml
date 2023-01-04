@@ -82,4 +82,14 @@
           AND c.gender=#{jsonObject.gender}
 
     </select>
+
+
+    <select id="selectCount" resultType="java.lang.Integer">
+        SELECT
+            COUNT(*)
+        FROM
+            `copy` c
+        WHERE
+            c.gender = #{gender}
+    </select>
 </mapper>
