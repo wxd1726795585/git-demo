@@ -1,13 +1,16 @@
 package com.example.controller;
 
+import com.example.bean.GeShi;
 import com.example.impl.Test02ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -55,6 +58,17 @@ public class Test02Controller {
     @PostMapping("/test/selectCount")
     public void selectCount(@RequestParam("gender")String gender){
         test02Service.selectCount(gender);
+    }
+
+
+    @PostMapping("/test/geShi")
+    public String testGeShi(@RequestBody @Valid GeShi geShi , BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            String defaultMessage = bindingResult.getAllErrors().get(0).getDefaultMessage();
+            log.info(defaultMessage);
+            return defaultMessage;
+        }
+        return geShi.toString();
     }
 
 

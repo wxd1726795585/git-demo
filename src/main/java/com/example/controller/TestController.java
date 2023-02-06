@@ -1,9 +1,11 @@
 package com.example.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.example.base.BusinessException;
 import com.example.bean.Student;
 import com.example.collect.utils.ExcelUtils;
+import com.example.config.AccountInfoBean;
 import com.example.docx.WordTemplate;
 import com.example.req.InvoiceApprovalReq;
 import com.example.utils.ExportExcelUtil;
@@ -16,10 +18,14 @@ import org.apache.poi.xwpf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import com.example.req.*;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.io.*;
 import java.math.BigDecimal;
 import java.util.*;
@@ -172,6 +178,23 @@ public class TestController {
         String desFilePath = "d:/" + fileName;
         export.exportExcel(srcFilePath, desFilePath,response);
 
+    }
+
+
+    @PostMapping("/test/zhujie")
+    public String testZhuJie()  {
+        AccountInfoBean accountInfoBean1 = new AccountInfoBean();
+        accountInfoBean1.setReceiverAccountNo("22222");
+        accountInfoBean1.setReceiverAccountName("sdsd");
+        accountInfoBean1.setReceiverBankBranchName("sdsdd");
+        String s = JSON.toJSONString(accountInfoBean1);
+        redisTemplate.opsForHash().put("aaa","aaa",JSON.toJSONString(accountInfoBean1));
+        Object o =redisTemplate.opsForHash().get("aaa", "aaa");
+        String str=(String)o;
+        System.out.println(str);
+        AccountInfoBean accountInfoBean = JSONObject.parseObject(str, AccountInfoBean.class);
+        System.out.println(accountInfoBean);
+        return "接受成功";
     }
 
 
