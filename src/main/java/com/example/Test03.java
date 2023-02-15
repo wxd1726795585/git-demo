@@ -3,8 +3,10 @@ package com.example;
 
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * \* Created with WXD.
@@ -17,12 +19,19 @@ public class Test03 {
     private final static SimpleDateFormat longSdf =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");;
 
     public static void main(String[] args) {
-        String string = new String();
-        Date currentYearEndTime = getCurrentYearEndTime();
-        Date currentYearStartTime = getCurrentYearStartTime();
-        String format = longSdf.format(currentYearStartTime);
-        System.out.println(format);
-        Boolean aBoolean = new Boolean(true);
+        List<String> list=new ArrayList<>();
+        list.add("111");
+        list.add("222");
+        list.add("333");
+        list.add("444");
+        list.add("555");
+        List<String> list1=new ArrayList<>();
+        list1.add("111");
+        list1.add("222");
+        list1.add("333");
+        boolean b = list.removeAll(list1);
+        System.out.println(list);
+
     }
 
     /**

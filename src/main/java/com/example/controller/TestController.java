@@ -14,10 +14,7 @@ import org.apache.poi.xwpf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -35,6 +32,16 @@ public class TestController {
     private StringRedisTemplate redisTemplate;
     @Autowired(required = false)
     private TestService testService;
+
+
+    @PostMapping("/daorushuju")
+    public void demo06(@RequestBody Test006 test006) {
+        List<String> idList = test006.getIdList();
+        log.info("id集合:-{}-",idList);
+    }
+
+
+
     @GetMapping("import/excel")
     public void demo06(@RequestPart(value = "file")MultipartFile multipartFile) throws Exception {
         if (null==multipartFile || StringUtils.isBlank(multipartFile.getOriginalFilename())){
@@ -285,8 +292,7 @@ public class TestController {
 @Data
 class Test006{
     /**
-     * 交易月份
+     * id集合
      */
-    @DateTimeFormat(pattern = "yyyy-MM")
-    private Date occurMonth;
+  private List<String> idList;
 }
