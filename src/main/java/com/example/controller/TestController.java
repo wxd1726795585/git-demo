@@ -1,11 +1,14 @@
 package com.example.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.example.Student0011;
 import com.example.base.BusinessException;
 import com.example.bean.Student;
 import com.example.collect.utils.ExcelUtils;
 import com.example.docx.WordTemplate;
 import com.example.req.InvoiceApprovalReq;
+import com.example.res.ApiH5SignCallbackRes;
 import com.example.utils.ExportExcelUtil;
 import com.example.utils.PdfUtils;
 import com.service.TestService;
@@ -41,6 +44,20 @@ public class TestController {
         }
         List<Student> students1 = ExcelUtils.importExcelOld(multipartFile, 1, Student.class);
         System.out.println(students1);
+    }
+
+    @GetMapping("/zhuanhuan")
+    public void demo009() throws Exception {
+        ApiH5SignCallbackRes apiH5SignCallbackRes = new ApiH5SignCallbackRes();
+        apiH5SignCallbackRes.setCallbackUrl("https://wmpos.marubi.cn/k/integration/crm/hyg/signing-callback");
+        apiH5SignCallbackRes.setC("wmbh");
+        apiH5SignCallbackRes.setAgreeState("2");
+        apiH5SignCallbackRes.setAgreeDesc("签约成功");
+        apiH5SignCallbackRes.setTimes(0);
+        apiH5SignCallbackRes.setWorkerId("W1078348279688736768");
+        apiH5SignCallbackRes.setWorkerMobile("15031309551");
+        apiH5SignCallbackRes.setCooperatorId("C954411691225923584");
+        redisTemplate.opsForHash().put("H5_SIGN_OAPI_CALLBACK", "W1078348279688736768", JSON.toJSONString(apiH5SignCallbackRes));
     }
 
 

@@ -1,17 +1,15 @@
 package com.example;
 
 
-
-import com.example.bean.Student;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Properties;
 
 /**
  * \* Created with WXD.
@@ -19,14 +17,29 @@ import java.util.Properties;
  * \* Description:
  */
 @Slf4j
-public class Test03 {
-
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+public class Test03 implements Cloneable{
+    private String name;
+    private Integer age;
     private final static SimpleDateFormat shortSdf =new SimpleDateFormat("yyyy-MM-dd");;
     private final static SimpleDateFormat longSdf =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");;
+    static final String sy="222";
 
-    public static void main(String[] args) {
-        boolean equals = BigDecimal.ZERO.equals(new BigDecimal("0.00000"));
-        System.out.println(equals);
+    public static void main(String[] args) throws CloneNotSupportedException {
+        try {
+            test002();
+        }catch (Exception e){
+            throw new CloneNotSupportedException("222");
+        }
+
+
+    }
+
+    public static void test002(){
+        throw new ArrayIndexOutOfBoundsException("3343434");
     }
 
     /**
