@@ -8,6 +8,8 @@ import com.example.mapper.Test02Mapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -27,8 +29,10 @@ public class Test02ServiceImpl {
     /**
      * 批量增加数据
      */
+    @Transactional(timeout = 30,rollbackFor = Exception.class,isolation = Isolation.READ_COMMITTED)
     public void volumeIncrease() throws InterruptedException {
         log.info("批量增加数据.....");
+
         List<StudentEntity> list = new ArrayList<>();
 
         StudentEntity studentEntity = new StudentEntity();
@@ -39,15 +43,18 @@ public class Test02ServiceImpl {
         Thread.sleep(100);
         StudentEntity studentEntity2 = new StudentEntity();
         studentEntity2.setAge(1);
-        studentEntity2.setId(String.valueOf(System.currentTimeMillis()));
+        studentEntity2.setId(String.valueOf(System.currentTimeMillis()+1));
         studentEntity2.setIdCard("测试");
         studentEntity2.setName("测试");
 
         list.add(studentEntity);
         list.add(studentEntity2);
-
+        log.info("添加的数据:-{}-",list);
         int row=test02Mapper.volumeIncrease(list);
         log.info("总共增加了-{}-条",row);
+
+        log.info("睡眠10S......");
+        Thread.sleep(10000L);
 
     }
 
