@@ -61,6 +61,7 @@ public class Test02ServiceImpl {
     /**
      * 批量修改数据
      */
+    @Transactional(rollbackFor = Exception.class,timeout = 30,isolation = Isolation.READ_COMMITTED)
     public void bulkChanges() {
         log.info("批量修改数据...");
         StudentEntity studentEntity = new StudentEntity();
