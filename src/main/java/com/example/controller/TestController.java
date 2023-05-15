@@ -2,11 +2,13 @@ package com.example.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.example.HygResponse;
 import com.example.Student0011;
 import com.example.base.BusinessException;
 import com.example.bean.Student;
 import com.example.collect.utils.ExcelUtils;
 import com.example.docx.WordTemplate;
+import com.example.req.DemoReq;
 import com.example.req.InvoiceApprovalReq;
 import com.example.res.ApiH5SignCallbackRes;
 import com.example.utils.ExportExcelUtil;
@@ -27,6 +29,7 @@ import java.io.*;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 
 @RestController
@@ -37,9 +40,16 @@ public class TestController {
     private StringRedisTemplate redisTemplate;
     @Autowired(required = false)
     private TestService testService;
+
+
+    /**
+     * 阅读状态标记
+     */
+    private static final String READING_STATE_FLAG = "READING_STATE_FLAG";
+
     @GetMapping("import/excel")
-    public void demo06(@RequestPart(value = "file")MultipartFile multipartFile) throws Exception {
-        if (null==multipartFile || StringUtils.isBlank(multipartFile.getOriginalFilename())){
+    public void demo06(@RequestPart(value = "file") MultipartFile multipartFile) throws Exception {
+        if (null == multipartFile || StringUtils.isBlank(multipartFile.getOriginalFilename())) {
             throw new BusinessException("输入文件不正确");
         }
         List<Student> students1 = ExcelUtils.importExcelOld(multipartFile, 1, Student.class);
@@ -62,11 +72,26 @@ public class TestController {
 
 
     @GetMapping("/demo02")
-    public void demo01(HttpServletResponse response)throws Exception{
-        String date_test = redisTemplate.opsForValue().get("DATE_TEST");
+    public HygResponse demo01(DemoReq req) throws Exception {
+        Long kkkkk = redisTemplate.opsForValue().increment("kkkkk6666", 1);
+        log.info("此时的次数.:{}", kkkkk);
+        redisTemplate.expire("kkkkk6666", 1L, TimeUnit.DAYS);
+        return HygResponse.Success();
+        //Set<String> keys = redisTemplate.keys("*" + READING_STATE_FLAG + "*");
+        //Long delete = redisTemplate.delete(keys);
+        //System.out.println("删除个数" + delete);
+        /*String date_test = redisTemplate.opsForValue().get("DATE_TEST");
         String[] split = date_test.split("~");
         System.out.println(split[0]);
-        System.out.println(split[1]);
+        System.out.println(split[1]);*/
+        //Set<String> keys = redisTemplate.keys("*" + READING_STATE_FLAG + "*");
+        //System.out.println(keys);
+        //System.out.println(keys.size());
+        //for (String k:
+        //     keys) {
+        //    Boolean delete = redisTemplate.delete(k);
+        //    System.out.println(delete);
+        //}
         /*redisTemplate.opsForHash().put("a","b",String.valueOf(1112.550));
         String o = (String) redisTemplate.opsForHash().get("a", "b");
         BigDecimal bigDecimal = new BigDecimal(o);
@@ -137,18 +162,18 @@ public class TestController {
         log.info("获取所有的value值:{}",hash3);*/
         //redisTemplate.opsForValue().set("test","10");
     }
+
     @PostMapping("/test008")
-    public void testDemo008(String topic, String tag, String paramJsonStr){
+    public void testDemo008(String topic, String tag, String paramJsonStr) {
         log.info("手动发送MQ，Topic：{}，Tag：{}，Param：{}", topic, tag, paramJsonStr);
         InvoiceApprovalReq invoiceApprovalReq = JSON.parseObject(paramJsonStr, InvoiceApprovalReq.class);
 
-        log.info("内容体:-{}-",invoiceApprovalReq);
+        log.info("内容体:-{}-", invoiceApprovalReq);
     }
 
 
-
     @GetMapping("/test006")
-    public void testDemo001(HttpServletResponse response)throws Exception{
+    public void testDemo001(HttpServletResponse response) throws Exception {
         /*HashMap<String, Object> map = new HashMap<>();
         //商户名称
         map.put("cooperatorName","a");
@@ -187,13 +212,13 @@ public class TestController {
         String srcFilePath = "d:/hezuopinggu.xlsx";
         String fileName = "test_" + System.currentTimeMillis() + ".xlsx";
         String desFilePath = "d:/" + fileName;
-        export.exportExcel(srcFilePath, desFilePath,response);
+        export.exportExcel(srcFilePath, desFilePath, response);
 
     }
 
 
     @GetMapping("/demo01")
-    public void testDemo() throws Exception{
+    public void testDemo() throws Exception {
         //老板需要等待15个员工会议室开会
         final CountDownLatch latch = new CountDownLatch(15);
         for (int i = 0; i < 15; i++) {
@@ -222,26 +247,26 @@ public class TestController {
             e.printStackTrace();
         }
 
-        }
+    }
 
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         FileInputStream inputStream = new FileInputStream("D:\\健康测评.docx");
         XWPFDocument docx = new XWPFDocument(inputStream);
         //设置参数
         WordTemplate wordTemplate = new WordTemplate(docx);
         HashMap<String, String> replaceMap = new HashMap<>();
-        replaceMap.put("cooperatorName","测试商户");
-        replaceMap.put("totalScore","15");
+        replaceMap.put("cooperatorName", "测试商户");
+        replaceMap.put("totalScore", "15");
         wordTemplate.replaceTag(replaceMap);
-        for (int i = 0; i <=20 ; i++) {
+        for (int i = 0; i <= 20; i++) {
             //获取所有表格
             List<XWPFTable> tables = docx.getTables();
             //这里简单取第一个表格
             XWPFTable table = tables.get(0);
             //获取表头，第一个是表头,所以需要+1
             XWPFTableRow header = table.getRow(0);
-            if (i==0){
+            if (i == 0) {
                 //获取到刚刚插入的行
                 XWPFTableRow row = table.getRow(i + 1);
                 //设置单元格内容
@@ -259,7 +284,7 @@ public class TestController {
                 run.setFontSize(15);
                 run.setText("证件照占比10.0000%20.0000%");
             }
-            if (i<=19){
+            if (i <= 19) {
                 //获取到刚刚插入的行
                 XWPFTableRow row = table.getRow(i + 1);
                 //设置单元格内容
@@ -269,7 +294,7 @@ public class TestController {
                 run.setText("aaa");
 
             }
-            if (i==20){
+            if (i == 20) {
                 XWPFTableRow row2 = table.getRow(i + 1);
                 XWPFParagraph xwpfParagraph = row2.getCell(0).getParagraphs().get(0);
                 XWPFRun run = xwpfParagraph.createRun();
@@ -300,10 +325,9 @@ public class TestController {
         inputStream.close();
 
 
+    }
 
-
-}
-    private static  void word2pdf(String filePath, String pdfBdUrl) {
+    private static void word2pdf(String filePath, String pdfBdUrl) {
         try {
             PdfUtils.word2pdf(filePath, pdfBdUrl);
         } catch (Exception e) {
@@ -312,8 +336,9 @@ public class TestController {
     }
 
 }
+
 @Data
-class Test006{
+class Test006 {
     /**
      * 交易月份
      */

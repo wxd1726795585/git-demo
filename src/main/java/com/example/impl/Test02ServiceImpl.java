@@ -26,10 +26,11 @@ import java.util.List;
 public class Test02ServiceImpl {
     @Autowired
     private Test02Mapper test02Mapper;
+
     /**
      * 批量增加数据
      */
-    @Transactional(timeout = 30,rollbackFor = Exception.class,isolation = Isolation.READ_COMMITTED)
+    @Transactional(timeout = 30, rollbackFor = Exception.class, isolation = Isolation.READ_COMMITTED)
     public void volumeIncrease() throws InterruptedException {
         log.info("批量增加数据.....");
 
@@ -43,15 +44,15 @@ public class Test02ServiceImpl {
         Thread.sleep(100);
         StudentEntity studentEntity2 = new StudentEntity();
         studentEntity2.setAge(1);
-        studentEntity2.setId(String.valueOf(System.currentTimeMillis()+1));
+        studentEntity2.setId(String.valueOf(System.currentTimeMillis() + 1));
         studentEntity2.setIdCard("测试");
         studentEntity2.setName("测试");
 
         list.add(studentEntity);
         list.add(studentEntity2);
-        log.info("添加的数据:-{}-",list);
-        int row=test02Mapper.volumeIncrease(list);
-        log.info("总共增加了-{}-条",row);
+        log.info("添加的数据:-{}-", list);
+        int row = test02Mapper.volumeIncrease(list);
+        log.info("总共增加了-{}-条", row);
 
         log.info("睡眠10S......");
         Thread.sleep(10000L);
@@ -61,7 +62,7 @@ public class Test02ServiceImpl {
     /**
      * 批量修改数据
      */
-    @Transactional(rollbackFor = Exception.class,timeout = 30,isolation = Isolation.READ_COMMITTED)
+    @Transactional(rollbackFor = Exception.class, timeout = 30, isolation = Isolation.READ_COMMITTED)
     public void bulkChanges() {
         log.info("批量修改数据...");
         StudentEntity studentEntity = new StudentEntity();
@@ -74,13 +75,12 @@ public class Test02ServiceImpl {
         studentEntity02.setName("修改数据");
         studentEntity02.setAge(6666666);
 
-        List<StudentEntity> list=new ArrayList<>();
+        List<StudentEntity> list = new ArrayList<>();
         list.add(studentEntity);
         list.add(studentEntity02);
 
-        int row=test02Mapper.bulkChanges(list);
-        log.info("总共修改了-{}-条",row);
-
+        int row = test02Mapper.bulkChanges(list);
+        log.info("总共修改了-{}-条", row);
 
 
     }
@@ -93,7 +93,6 @@ public class Test02ServiceImpl {
         tradeMqConsumerLog.setMsgTag("1");
         tradeMqConsumerLog.setRemark("一");
         tradeMqConsumerLog.setConsumerTimes(1);
-
 
 
         TradeMqConsumerLog tradeMqConsumerLog1 = new TradeMqConsumerLog();
@@ -116,15 +115,15 @@ public class Test02ServiceImpl {
         tradeMqConsumerLogs.add(tradeMqConsumerLog2);
 
 
-        tradeMqConsumerLogs.forEach(x->{
+        tradeMqConsumerLogs.forEach(x -> {
             x.setLid(x.getGroupName().concat(x.getMsgKey()).concat(x.getMsgTag()));
         });
-        int i=test02Mapper.updateMoreData(tradeMqConsumerLogs);
-        log.info("总共修改了:{}条数据",i);
+        int i = test02Mapper.updateMoreData(tradeMqConsumerLogs);
+        log.info("总共修改了:{}条数据", i);
     }
 
     public void selectDemo(List<String> id) {
-        BigDecimal bigDecimal=test02Mapper.selectDemo(id);
+        BigDecimal bigDecimal = test02Mapper.selectDemo(id);
         System.out.println(bigDecimal);
     }
 
@@ -134,9 +133,10 @@ public class Test02ServiceImpl {
     public void testMybatis() {
         //测试demo 分支 测试
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("gender","女");
-        String age="14";
-        List<CopyEntity> list=test02Mapper.testMybatis(jsonObject,age);
+        jsonObject.put("gender", "女");
+        String age = "14";
+        List<CopyEntity> list = test02Mapper.testMybatis(jsonObject, age);
+        log.info("集合值为:-{}-", list);
         System.out.println(list);
     }
 
@@ -145,6 +145,6 @@ public class Test02ServiceImpl {
      */
     public void selectCount(String gender) {
         Integer count = test02Mapper.selectCount(gender);
-        log.info("个数-{}-",count);
+        log.info("个数-{}-", count);
     }
 }

@@ -13,10 +13,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
 
 /**
  * \* Created with WXD.
@@ -25,18 +22,21 @@ import java.util.Date;
  * \* @author 王祥栋
  */
 public class Test11222 {
+    /**
+     * 阅读状态标记
+     */
+    private static final String READING_STATE_FLAG = "READING_STATE_FLAG";
+
     public static void main(String[] args) throws ParseException {
-        ArrayList<String> strings = new ArrayList<>();
-        strings.add("aaa");
-        strings.add("aaa");
-        strings.add("aaa");
-        System.out.println(strings);
+        String str="5220010103687788";
+        System.out.println(str.length());
     }
+
     public static String cooperatorNameFilter(String name) {
         return StringUtils.isEmpty(name) ? name : name.replaceAll("[0-9]*[D-Z]", "");
     }
 
-    public static String dateNextDay(String ceShi){
+    public static String dateNextDay(String ceShi) {
         DateFormat dft = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date temp = dft.parse(ceShi);
@@ -138,25 +138,26 @@ public class Test11222 {
         }
         //判断两个天数的大小并进行计算
         if (sum > sum2) {
-            return sum-sum2;
+            return sum - sum2;
            /* System.out.println("间隔的时间天数为:" + (sum - sum2));
             System.out.println("间隔的周数为:" + (sum - sum2) / 7);*/
         } else {
-            return sum2-sum;
+            return sum2 - sum;
             /*System.out.println("间隔的时间天数为:" + (sum2 - sum));
             System.out.println("间隔的周数为:" + (sum2 - sum) / 7);*/
         }
 
     }
+
     public static int betweenMonth(Date begina, Date end) {
 
-        Calendar begin= Calendar.getInstance();
+        Calendar begin = Calendar.getInstance();
         begin.setTime(begina);
         int beginYear = begin.get(Calendar.YEAR);
         int beginMonth = begin.get(Calendar.MONTH);
         int beginDay = begin.get(Calendar.DAY_OF_MONTH);
 
-        Calendar endTime= Calendar.getInstance();
+        Calendar endTime = Calendar.getInstance();
         endTime.setTime(end);
         int endYear = endTime.get(Calendar.YEAR);
         int endMonth = endTime.get(Calendar.MONTH);
@@ -173,6 +174,7 @@ public class Test11222 {
 
     /**
      * 传入日期获取所在月的第一天
+     *
      * @param date
      * @return
      */
@@ -186,6 +188,7 @@ public class Test11222 {
 
     /**
      * 传入日期获取所在月的最后一天
+     *
      * @param date
      * @return
      */
@@ -196,21 +199,22 @@ public class Test11222 {
         cal.set(Calendar.DAY_OF_MONTH, last);
         return cal.getTime();
     }
+
     @Test
-    public void test001(){
+    public void test001() {
         //当前日期是202205
-        int i=50;
-        String str="202205";
+        int i = 50;
+        String str = "202205";
         ArrayList<String> strings = new ArrayList<>(i);
         //现存当前的年月
         strings.add(str);
-        for (int j = 0; j < i-1; j++) {
+        for (int j = 0; j < i - 1; j++) {
             String s1 = strings.get(j);
-            if (s1.substring(4,6).equals("01")){
+            if (s1.substring(4, 6).equals("01")) {
                 String substring = s1.substring(0, 4);
                 Integer integer = Integer.valueOf(substring);
-                integer=integer-1;
-                strings.add(String.valueOf(integer)+"12");
+                integer = integer - 1;
+                strings.add(String.valueOf(integer) + "12");
                 continue;
             }
             //不是特殊情况
@@ -230,6 +234,7 @@ public class Test11222 {
 
         return period.getDays();
     }
+
     public static Date addDays(Date beginDate, int days) {
         Date endDate = new Date();
         long end = beginDate.getTime() + 1000 * 60 * 60 * 24 * days;

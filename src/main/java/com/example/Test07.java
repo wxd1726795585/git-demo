@@ -7,7 +7,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,6 +25,7 @@ public class Test07 {
      * 校验数字的正则表达式
      */
     private static Pattern NUMBER_PATTERN = Pattern.compile("-?[0-9]+(\\.[0-9]+)?");
+    private static SimpleDateFormat format = new SimpleDateFormat("yyyy");
 
     public static void main(String[] args) throws IOException {
         FileInputStream inputStream = new FileInputStream("D:\\a\\a.txt");
@@ -32,14 +35,29 @@ public class Test07 {
 
 
     @Test
-    public void demo001(){
-
+    public void demo001() {
+        String identNo = "14272919980304511X";
+        Integer age = 0;
+        Date date = new Date();
+        if (identNo.length() == 18) {
+            // 身份证上的年份
+            String year = identNo.substring(6).substring(0, 4);
+            System.out.println(year);
+            String format = Test07.format.format(new Date());
+            System.out.println(format);
+            age = Integer.valueOf(format) - Integer.valueOf(year);
+        } else {
+            //不是18位数的身份证号码,默认25岁
+            age = 25;
+        }
+        System.out.println(age);
     }
+
     /**
      * 利用正则表达式来判断字符串是否为数字
      */
     private static boolean checkStrIsNum02(String str) {
-        if (str.contains("-")){
+        if (str.contains("-")) {
             return false;
         }
         String bigStr;
