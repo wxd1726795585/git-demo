@@ -1,8 +1,14 @@
 package com.example;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.example.entity.CopyEntity;
+import com.example.entity.PabkAccountTradeDetailReq;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.util.StopWatch;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,21 +20,23 @@ import java.util.regex.Pattern;
 public class Test04 {
     private static Pattern NUMBER_PATTERN = Pattern.compile("-?[0-9]+(\\.[0-9]+)?");
     public static void main(String[] args) throws Exception {
-        /*BigDecimal bigDecimal = new BigDecimal("0");
-        BigDecimal bigDecimal1 = new BigDecimal("-1");
-        if ("1".equals(bigDecimal1.compareTo(bigDecimal))){
-            System.out.println(1);
-        }
-        System.out.println(bigDecimal1.compareTo(bigDecimal));
-        *//*BigDecimal bigDecimal = new BigDecimal("-1");
-        BigDecimal add = bigDecimal.add(new BigDecimal("1"));
-        System.out.println(add);*//*
-        boolean b = isXiaoShu("-5.0");
-        System.out.println(b);*/
-        String str="56";
-        boolean numeric = isNumeric(str);
-        System.out.println(numeric);
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+        Thread.sleep(10000L);
+        stopWatch.stop();
+        long totalTimeMillis = stopWatch.getTotalTimeMillis();
+        System.out.println(totalTimeMillis/1000);
     }
+
+    private static void get() {
+        CopyEntity copyEntity = new CopyEntity();
+        copyEntity.setAge(1);
+        copyEntity.setFlag(Boolean.TRUE);
+        copyEntity.setGender("男");
+        copyEntity.setName("张三");
+        copyEntity.setSamplingCycle("例子");
+    }
+
     //判断正整数
     public static boolean isNumeric(String str){
         for (int i = str.length();--i>=0;){

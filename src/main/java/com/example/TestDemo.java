@@ -1,12 +1,12 @@
 package com.example;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashSet;
 
 /**
  * \* Created with WXD.
@@ -15,23 +15,20 @@ import java.util.HashMap;
  * \* @author 王祥栋
  */
 public class TestDemo {
-    @Autowired
-    private StringRedisTemplate redisTemplate;
     @Test
-    public void redis(){
-        /*//联系redis的常用api
-        //String类型的
-        redisTemplate.opsForValue().set("test0708","test0708");
-        System.out.println(redisTemplate.opsForValue().get("test0708"));
-        HashMap<String, String> stringStringHashMap = new HashMap<>();
-        stringStringHashMap.put("1","1");
-        stringStringHashMap.put("2","2");
-        redisTemplate.opsForValue().multiSet(stringStringHashMap);*/
-        BigDecimal bigDecimal = new BigDecimal("0");
-        bigDecimal.add(new BigDecimal("111"));
-        System.out.println(bigDecimal);
-        String str="aaa";
-        str.concat("bbb");
-        System.out.println(str);
+    public void redis() {
+        String str="1133714892335882240-wwxxdd";
+        String substring = str.substring(20);
+        System.out.println(substring);
+
     }
+
+    @Data
+    @AllArgsConstructor
+    class Person {
+        private String name;
+        private String age;
+    }
+
+
 }

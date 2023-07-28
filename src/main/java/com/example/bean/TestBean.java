@@ -1,10 +1,15 @@
 package com.example.bean;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.interface1.TestInterface;
 import lombok.Data;
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -18,13 +23,8 @@ import java.util.HashMap;
 @Component
 public class TestBean implements TestInterface {
 
-    public static void main(String[] args) {
-        HashMap<String, String> params = new HashMap<>(1);
-        params.put("111","222");
-        params.put("000","222222");
-        params.put("1222","222333");
-        params.put("4333","666666");
-        System.out.println(params);
+    public static void main(String[] args) throws ParseException {
+
     }
 
     private static String getDesc(){

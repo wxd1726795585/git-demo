@@ -46,22 +46,12 @@ public class Test116116 {
 
 
         public static void main(String[] args) {
-            HashMap<Object, Object> hashMap = new HashMap<>();
-            hashMap.put("test","001");
-            hashMap.put("test1","002");
-            hashMap.put("test2","003");
-            Set<Object> set = hashMap.keySet();
-            set.forEach(x->{
-                System.out.println("key为:"+x+"value为:"+hashMap.get(x));
-            });
-            Collection<Object> values = hashMap.values();
-            System.out.println(values);
-            Set<Map.Entry<Object, Object>> entries = hashMap.entrySet();
-            for (Map.Entry entry:
-                 entries) {
-                System.out.println("key:"+entry.getKey()+"value:"+entry.getValue());
-            }
-
+            BigDecimal bigDecimal = new BigDecimal("22");
+            int i = bigDecimal.compareTo(new BigDecimal("21"));
+            String str="dasdfsdsf";
+            int s = str.indexOf("s");
+            System.out.println(s);
+    
         }
     /**
      * 开票日期格式化

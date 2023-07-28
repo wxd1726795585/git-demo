@@ -14,15 +14,19 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.omg.CORBA.Request;
 
+import javax.xml.ws.Response;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 public class HttpUtils {
+
 
     private static final String ENCODING = "UTF-8";
 
@@ -124,6 +128,7 @@ public class HttpUtils {
         //第五步：处理返回值
         return returnValue;
     }
+
 
 
 }

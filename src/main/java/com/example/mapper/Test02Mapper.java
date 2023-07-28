@@ -4,12 +4,14 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.entity.CopyEntity;
 import com.example.entity.StudentEntity;
 import com.example.entity.TradeMqConsumerLog;
+import com.example.req.PersonReq;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * \* Created with WXD.
@@ -57,4 +59,18 @@ public interface Test02Mapper {
      * @return
      */
     Integer selectCount(@Param("gender")String gender);
+
+    /**
+     * 测试sql
+     * @param flag
+     * @return
+     */
+    List<CopyEntity> test01Sql(@Param("flag") Boolean flag);
+
+    /**
+     * 测试sqlv2
+     * @param personReq
+     * @return
+     */
+    List<Map<String, Object>> test02Sql(@Param("req") PersonReq personReq);
 }

@@ -25,11 +25,14 @@ public class Test07 {
      * 校验数字的正则表达式
      */
     private static Pattern NUMBER_PATTERN = Pattern.compile("-?[0-9]+(\\.[0-9]+)?");
-    private static SimpleDateFormat format = new SimpleDateFormat("yyyy");
+    private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
     public static void main(String[] args) throws IOException {
-        FileInputStream inputStream = new FileInputStream("D:\\a\\a.txt");
-        int read = inputStream.read();
+        Date date = new Date();
+        String format = Test07.format.format(date);
+        format = format.concat(" 00:00:00");
+
+        System.out.println(format);
 
     }
 

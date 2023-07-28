@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace= "com.example.mapper.Test02Mapper" >
+<mapper namespace="com.example.mapper.Test02Mapper">
+
+
+    <resultMap id="map01" type="com.example.entity.CopyEntity">
+        <id property="id" column="id"/>
+
+    </resultMap>
     <select id="selectAllStudents" resultType="com.example.entity.StudentEntity">
-        select
-        age as age,
-        id as id,
-        id_card as idCard,
-        name as name
+        select age     as age,
+               id      as id,
+               id_card as idCard,
+               name    as name
         from student
     </select>
     <!--批量增加数据-->
@@ -60,7 +65,6 @@
     </update>
 
 
-
     <select id="selectDemo" resultType="java.math.BigDecimal">
         select sum(d.test119)
         from dept d
@@ -72,24 +76,49 @@
     </select>
 
     <select id="testMybatis" resultType="com.example.entity.CopyEntity">
-        SELECT
-            c.age AS age,
-            c.delete_flag AS deleteFlag,
-            c.gender AS gender,
-            c.id_card AS idCard
+        SELECT c.age         AS age,
+               c.delete_flag AS deleteFlag,
+               c.gender      AS gender,
+               c.id_card     AS idCard
         FROM copy c
-        WHERE c.age=#{age}
-          AND c.gender=#{jsonObject.gender}
+        WHERE c.age = #{age}
+          AND c.gender = #{jsonObject.gender}
 
     </select>
 
 
     <select id="selectCount" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM `copy` c
+        WHERE c.gender = #{gender}
+    </select>
+
+
+    <select id="test01Sql" resultType="com.example.entity.CopyEntity">
         SELECT
-            COUNT(*)
-        FROM
-            `copy` c
-        WHERE
-            c.gender = #{gender}
+        c.age AS age,
+        c.delete_flag AS deleteFlag,
+        c.gender AS gender,
+        c.id_card AS idCard,
+        c.flag as flag,
+        c.name as name
+        FROM copy c
+        WHERE 1=1
+        <if test="flag != null and flag == true">
+            and c.flag=1
+        </if>
+        <if test="flag != null and flag == false">
+            and c.flag=0
+        </if>
+
+    </select>
+    <select id="test02Sql" resultType="map">
+        select name as aname,
+               age,
+               gender,
+               birthday
+        from tbl_person
+        where name = #{req.name}
+          and gender = #{req.gender}
     </select>
 </mapper>

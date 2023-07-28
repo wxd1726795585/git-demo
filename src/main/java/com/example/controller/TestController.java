@@ -72,11 +72,11 @@ public class TestController {
 
 
     @GetMapping("/demo02")
-    public HygResponse demo01(DemoReq req) throws Exception {
-        Long kkkkk = redisTemplate.opsForValue().increment("kkkkk6666", 1);
-        log.info("此时的次数.:{}", kkkkk);
-        redisTemplate.expire("kkkkk6666", 1L, TimeUnit.DAYS);
-        return HygResponse.Success();
+    public HygResponse demo01() {
+        Map<Object, Object> ceshide = redisTemplate.opsForHash().entries("ceshide");
+        Set<Object> set = ceshide.keySet();
+        boolean flag = set.contains("你好啊");
+        return HygResponse.Success(flag);
         //Set<String> keys = redisTemplate.keys("*" + READING_STATE_FLAG + "*");
         //Long delete = redisTemplate.delete(keys);
         //System.out.println("删除个数" + delete);

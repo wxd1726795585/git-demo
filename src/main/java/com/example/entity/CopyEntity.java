@@ -17,4 +17,5 @@ public class CopyEntity {
     private Integer age;
     private String samplingCycle;
     private Integer deleteFlag;
+    private Boolean flag;
 }
