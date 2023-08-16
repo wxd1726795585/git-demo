@@ -20,20 +20,26 @@ public class StreamDemo {
 
     @Test
     public void demo(){
-        //List<Student> list =new ArrayList<>();
-        //list.add(new Student("张三",15));
-        //list.add(new Student("张三",15));
-        //list.add(new Student("李斯特",17));
-        //list.add(new Student("李斯特",17));
-        //list.add(new Student("李斯特1",18));
-        //list.add(new Student("李斯特2",19));
-        //Map<Integer, List<Student>> collect = list.stream().collect(Collectors.groupingBy(Student::getScore));
-        //System.out.println(collect);
-        //Student student = new Student("张三", 15);
-        //String s = JSON.toJSONString(student);
-        //System.out.println(s);
-        Date date = new Date(1616601600000L);
+        String str = "ASDF";
+        byte[] bytes = str.getBytes();
+        for (byte b:
+             bytes) {
+            System.out.println(b);
+        }
 
+    }
+    /**
+     * 过滤空格
+     *
+     * @param list 原始数据
+     * @return
+     */
+    public List<String> filterBlankSpace(List<String> list) {
+        List<String> cooperatorIdList = new ArrayList<>();
+        list.forEach(x -> {
+            cooperatorIdList.add(x.trim());
+        });
+        return cooperatorIdList;
     }
 }
 @Data

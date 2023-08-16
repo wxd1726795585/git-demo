@@ -15,6 +15,8 @@ public interface TestInterface {
         return "sdasdasd";
     }
 
+    public abstract void getSomething();
+
     ;
 
     static String getAnotherName() {

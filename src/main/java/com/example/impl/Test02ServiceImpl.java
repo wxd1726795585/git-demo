@@ -39,13 +39,11 @@ public class Test02ServiceImpl {
         StudentEntity studentEntity = new StudentEntity();
         studentEntity.setAge(1);
         studentEntity.setId(String.valueOf(System.currentTimeMillis()));
-        studentEntity.setIdCard("测试");
         studentEntity.setName("测试");
         Thread.sleep(100);
         StudentEntity studentEntity2 = new StudentEntity();
         studentEntity2.setAge(1);
         studentEntity2.setId(String.valueOf(System.currentTimeMillis() + 1));
-        studentEntity2.setIdCard("测试");
         studentEntity2.setName("测试");
 
         list.add(studentEntity);
@@ -54,8 +52,6 @@ public class Test02ServiceImpl {
         int row = test02Mapper.volumeIncrease(list);
         log.info("总共增加了-{}-条", row);
 
-        log.info("睡眠10S......");
-        Thread.sleep(10000L);
 
     }
 

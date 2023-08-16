@@ -1,6 +1,7 @@
 package com.example;
 
 import com.BusinessCode;
+import lombok.Data;
 import org.apache.poi.ss.formula.functions.T;
 
 /**
@@ -9,6 +10,7 @@ import org.apache.poi.ss.formula.functions.T;
  * \* Description:
  * \* @author 王祥栋
  */
+@Data
 public class HygResponse<T> {
 
     private String statusCode = "000000";

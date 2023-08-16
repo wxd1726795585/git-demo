@@ -1,17 +1,10 @@
 package com.example.bean;
 
-import com.alibaba.fastjson.JSONObject;
 import com.example.interface1.TestInterface;
 import lombok.Data;
-import org.apache.commons.codec.binary.Base64;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
 
 /**
  * \* Created with WXD.
@@ -24,19 +17,24 @@ import java.util.HashMap;
 public class TestBean implements TestInterface {
 
     public static void main(String[] args) throws ParseException {
-
+        String str ="111111111111111111111111111111";
+        System.out.println(str.length());
     }
 
-    private static String getDesc(){
-        String str="A";
-        switch (str){
-            case "A":
-                return "A";
-            case "B":
-                return "B";
+    private static String getDesc() {
+        try {
+            int i = 1 / 1;
+            return "C";
+        } catch (Exception e) {
+            return "A";
+        }finally {
+            return "B";
         }
-        return "dsdsds";
     }
 
 
+    @Override
+    public void getSomething() {
+
+    }
 }
