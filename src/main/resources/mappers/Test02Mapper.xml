@@ -121,4 +121,10 @@
         where name = #{req.name}
           and gender = #{req.gender}
     </select>
+
+    <insert id="test03Sql">
+        insert into copy
+            (`id`, `name`, `gender`)
+        values (#{copy.id}, #{copy.name}, #{copy.gender})
+    </insert>
 </mapper>

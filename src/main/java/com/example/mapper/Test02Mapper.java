@@ -73,4 +73,6 @@ public interface Test02Mapper {
      * @return
      */
     List<Map<String, Object>> test02Sql(@Param("req") PersonReq personReq);
+
+    int test03Sql(@Param("copy") CopyEntity copyEntity);
 }

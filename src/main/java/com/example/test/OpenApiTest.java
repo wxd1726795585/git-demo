@@ -82,4 +82,9 @@ public class OpenApiTest {
         int i = bigDecimal.compareTo(BigDecimal.ZERO);
         System.out.println(i);
     }
+
+    @Test
+    public void test01(){
+        System.out.println("test.....");
+    }
 }

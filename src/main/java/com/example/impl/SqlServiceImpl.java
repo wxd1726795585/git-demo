@@ -12,11 +12,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * \* Created with WXD.
@@ -153,7 +154,18 @@ public class SqlServiceImpl implements SqlService {
         return HygResponse.Success(list);
     }
 
-
+    @Override
+    public HygResponse test03Sql() {
+        CopyEntity copyEntity = new CopyEntity();
+        copyEntity.setId("1");
+        String str ="名字:张三";
+        String str1 ="年龄:18";
+        String str2 ="住址:陕西省";
+        copyEntity.setName(str.concat("\\n").concat(str1).concat("\\n").concat(str2));
+        copyEntity.setGender("1");
+        int count = test02Mapper.test03Sql(copyEntity);
+        return HygResponse.Success();
+    }
 }
 
 @AllArgsConstructor

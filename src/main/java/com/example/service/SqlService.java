@@ -24,4 +24,5 @@ public interface SqlService {
      */
     HygResponse test02Sql();
 
+    HygResponse test03Sql();
 }

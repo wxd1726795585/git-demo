@@ -81,6 +81,16 @@ public class SqlController {
         return service.test02Sql();
     }
 
+    /**
+     * 测试sql---v2
+     *
+     * @return
+     */
+    @PostMapping("/test03/sql")
+    public HygResponse test03Sql() {
+        return service.test03Sql();
+    }
+
 
     /**
      * 测试参数
@@ -88,13 +98,9 @@ public class SqlController {
      * @return
      */
     @GetMapping("/test01/params")
-    public HygResponse test01Params(@RequestParam("name") String name,
-                                    @RequestParam("gender") String gender) {
-        log.info("请求参数:姓名:-{}-,性别:-{}-", name, gender);
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("name", name);
-        jsonObject.put("gender", gender);
-        stringRedisTemplate.opsForValue().set("add", JSONObject.toJSONString(jsonObject));
+    public HygResponse test01Params() {
+        Long delete = stringRedisTemplate.opsForHash().delete("1", "2","3");
+        System.out.println(delete);
         //
         //AlipayClient alipayClient = new DefaultAlipayClient(URL, APP_ID, APP_PRIVATE_KEY, FORMAT, CHARSET, ALIPAY_PUBLIC_KEY, SIGN_TYPE);
         //CertAlipayRequest certAlipayRequest = new CertAlipayRequest();
