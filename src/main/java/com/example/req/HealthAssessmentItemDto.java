@@ -2,6 +2,8 @@ package com.example.req;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * @author Jinhao
  * @create 2022/02/28 14:18
@@ -12,6 +14,7 @@ public class HealthAssessmentItemDto {
     /**
      * 测评项名称
      */
+    @NotBlank(message = "测评项名称不能为空")
     private String assessmentItemName;
 
     /**

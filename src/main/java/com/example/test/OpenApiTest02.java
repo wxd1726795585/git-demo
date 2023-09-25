@@ -1,19 +1,25 @@
 package com.example.test;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.HygResponse;
 import com.example.utils.AESUtils;
 import com.example.utils.HttpUtils;
+import com.example.utils.HttpUtils1;
 import com.example.utils.RSAUtils;
 import lombok.extern.slf4j.Slf4j;
+import okhttp3.MediaType;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigDecimal;
-import java.security.Key;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * \* Created with WXD.
@@ -22,7 +28,7 @@ import java.util.Map;
  * \* @author 王祥栋
  */
 @Slf4j
-public class OpenApiTest {
+public class OpenApiTest02 {
     /**
      * 公钥
      */
@@ -65,17 +71,10 @@ public class OpenApiTest {
         jsonObject.put("businessBody", businessBody);
 
         try {
-            String s1 = HttpUtils.postJson(API_GET_STREAM, jsonObject.toJSONString());
-            log.info("返回的数据长度为:-{}-", s1.length());
-            if (StringUtils.isBlank(s1)) {
-                log.error("企业余额查询接口返回数据为空");
-            }
-            HygResponse hygResponse = JSONObject.parseObject(s1, HygResponse.class);
-            Object data = hygResponse.getData();
-            String s2 = AESUtils.decryptByHex(data.toString(), AES_KEY);
-
-            JSONObject decryptData = JSONObject.parseObject(s2, JSONObject.class);
-            log.info("返回结果为:-{}-", decryptData);
+            RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonObject.toJSONString());
+            Request request = new Request.Builder().url(API_GET_STREAM).post(body).build();
+            Response response = HttpUtils1.execute(request);
+            writeFile("D:\\wxdwxd.pdf", response);
 
         } catch (Exception e) {
             log.error("企业余额查询接口失败,失败原因:", e);
@@ -92,5 +91,34 @@ public class OpenApiTest {
     @Test
     public void test01() {
         System.out.println("test.....");
+    }
+
+    private static void writeFile(String path, Response response) {
+        FileOutputStream fos = null;
+        InputStream is = response.body().byteStream();
+        File file = new File(path);
+        try {
+            fos = new FileOutputStream(file);
+            byte[] bytes = new byte[1024];
+            int len = 0;
+            while ((len = is.read(bytes)) != -1) {
+                fos.write(bytes, 0, len);
+            }
+            fos.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (is != null) {
+                    is.close();
+                }
+                if (fos != null) {
+                    fos.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("下载成功");
     }
 }

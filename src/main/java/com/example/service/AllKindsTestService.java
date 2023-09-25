@@ -1,5 +1,7 @@
 package com.example.service;
 
+import com.example.HygResponse;
+
 /**
  * \* Created with WXD.
  * \* Date:  2023/6/2
@@ -15,5 +17,8 @@ public interface AllKindsTestService {
     /**
      * 异步测试
      */
-    void testAsync();
+    HygResponse testAsync();
+
+    HygResponse demo01();
+
 }

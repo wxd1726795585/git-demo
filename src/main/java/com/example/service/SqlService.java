@@ -14,15 +14,25 @@ import java.util.List;
 public interface SqlService {
     /**
      * 测试sql
+     *
      * @param flag 标记
      */
     List<CopyEntity> test01Sql(Boolean flag);
 
     /**
      * 测试sql---v2
+     *
      * @return
      */
     HygResponse test02Sql();
 
-    HygResponse test03Sql();
+    HygResponse test03Sql(String id);
+
+    /**
+     * 测试sql---v4
+     *
+     * @param id
+     * @return
+     */
+    HygResponse test04Sql(String id);
 }

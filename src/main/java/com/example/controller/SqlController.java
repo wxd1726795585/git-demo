@@ -82,14 +82,27 @@ public class SqlController {
     }
 
     /**
-     * 测试sql---v2
+     * 测试sql---v3
      *
      * @return
      */
     @PostMapping("/test03/sql")
-    public HygResponse test03Sql() {
-        return service.test03Sql();
+    public HygResponse test03Sql(@RequestParam("id")String id) {
+        return service.test03Sql(id);
     }
+
+    /**
+     * 测试sql---v4
+     *
+     * @return
+     */
+    @GetMapping("/test04/sql")
+    public HygResponse test04Sql(@RequestParam("id")String id) {
+        return service.test04Sql(id);
+    }
+
+
+
 
 
     /**

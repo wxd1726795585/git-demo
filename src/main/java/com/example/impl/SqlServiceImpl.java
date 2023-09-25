@@ -1,5 +1,6 @@
 package com.example.impl;
 
+import com.BusinessCode;
 import com.example.HygResponse;
 import com.example.entity.CopyEntity;
 import com.example.mapper.Test02Mapper;
@@ -11,13 +12,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 /**
  * \* Created with WXD.
@@ -155,16 +155,24 @@ public class SqlServiceImpl implements SqlService {
     }
 
     @Override
-    public HygResponse test03Sql() {
-        CopyEntity copyEntity = new CopyEntity();
-        copyEntity.setId("1");
-        String str ="名字:张三";
-        String str1 ="年龄:18";
-        String str2 ="住址:陕西省";
-        copyEntity.setName(str.concat("\\n").concat(str1).concat("\\n").concat(str2));
-        copyEntity.setGender("1");
-        int count = test02Mapper.test03Sql(copyEntity);
+    public HygResponse test03Sql(String id) {
+        int count = test02Mapper.test04Sql(id);
+        log.info("更改的条数:-{}-", count);
         return HygResponse.Success();
+    }
+
+    /**
+     * 测试sql---v4
+     *
+     * @param id ID
+     * @return
+     */
+    @Override
+    @Transactional(timeout = 30, rollbackFor = Exception.class, isolation = Isolation.READ_COMMITTED)
+    public HygResponse test04Sql(String id) {
+        int count = test02Mapper.insertCopy(id);
+        List<CopyEntity> list = test02Mapper.selectCopyList();
+        return HygResponse.Success(list);
     }
 }
 

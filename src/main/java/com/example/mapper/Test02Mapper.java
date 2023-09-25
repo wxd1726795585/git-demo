@@ -25,6 +25,7 @@ public interface Test02Mapper {
 
     /**
      * 批量增加数据
+     *
      * @param list
      * @return
      */
@@ -32,6 +33,7 @@ public interface Test02Mapper {
 
     /**
      * 批量修改数据
+     *
      * @param list
      * @return
      */
@@ -39,15 +41,17 @@ public interface Test02Mapper {
 
     /**
      * 批量修改
+     *
      * @param tradeMqConsumerLogs
      * @return
      */
     int updateMoreData(@Param("list") List<TradeMqConsumerLog> tradeMqConsumerLogs);
 
-    BigDecimal selectDemo(@Param("list")List<String> idList);
+    BigDecimal selectDemo(@Param("list") List<String> idList);
 
     /**
      * 测试mybatis
+     *
      * @param jsonObject
      * @param age
      * @return
@@ -56,12 +60,14 @@ public interface Test02Mapper {
 
     /**
      * 查询总条数
+     *
      * @return
      */
-    Integer selectCount(@Param("gender")String gender);
+    Integer selectCount(@Param("gender") String gender);
 
     /**
      * 测试sql
+     *
      * @param flag
      * @return
      */
@@ -69,10 +75,44 @@ public interface Test02Mapper {
 
     /**
      * 测试sqlv2
+     *
      * @param personReq
      * @return
      */
     List<Map<String, Object>> test02Sql(@Param("req") PersonReq personReq);
 
+    /**
+     * 测试sql-v3
+     *
+     * @param copyEntity
+     * @return
+     */
     int test03Sql(@Param("copy") CopyEntity copyEntity);
+
+
+    int test04Sql(@Param("id") String id);
+
+    /**
+     * 悲观锁
+     *
+     * @param id
+     * @return
+     */
+    CopyEntity pessimisticLockById(String id);
+
+    /**
+     * 更改条数
+     * @param id
+     * @return
+     */
+    Integer updateCount(String id);
+
+    /**
+     * 添加数据
+     * @param id
+     * @return
+     */
+    int insertCopy(String id);
+
+    List<CopyEntity> selectCopyList();
 }

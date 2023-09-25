@@ -18,4 +18,5 @@ public class CopyEntity {
     private String samplingCycle;
     private Integer deleteFlag;
     private Boolean flag;
+    private Integer count;
 }

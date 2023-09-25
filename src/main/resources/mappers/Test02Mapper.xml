@@ -127,4 +127,40 @@
             (`id`, `name`, `gender`)
         values (#{copy.id}, #{copy.name}, #{copy.gender})
     </insert>
+
+    <update id="test04Sql">
+        UPDATE `copy`
+        SET `name` = '测试'
+        WHERE id = #{id};
+    </update>
+
+    <select id="pessimisticLockById" resultType="com.example.entity.CopyEntity">
+        select id     as id,
+               name   as name,
+               gender as gender,
+               count as count
+        from copy
+        where id =#{id}
+            for
+        update
+    </select>
+
+    <update id="updateCount">
+        update copy
+        set count =count - 1
+        where id = #{id}
+    </update>
+
+    <insert id="insertCopy">
+        insert into copy
+        values (#{id}, '张三', '18', '10')
+    </insert>
+
+    <select id="selectCopyList" resultType="com.example.entity.CopyEntity">
+        SELECT c.id     id,
+               c.name   name,
+               c.count  `count`,
+               c.gender gender
+        FROM copy c
+    </select>
 </mapper>

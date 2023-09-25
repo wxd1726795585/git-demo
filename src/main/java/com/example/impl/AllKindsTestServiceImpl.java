@@ -1,5 +1,6 @@
 package com.example.impl;
 
+import com.example.HygResponse;
 import com.example.service.AllKindsTestService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,18 +28,25 @@ public class AllKindsTestServiceImpl implements AllKindsTestService {
         }
     }
 
-    @Async
+    @Async("healthResultExportExecutor")
     @Override
-    public void testAsync() {
-        try {
-            log.info("睡眠10S");
-            Thread.sleep(10000L);
-            log.info("睡眠结束");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public HygResponse testAsync() {
+            try {
+                log.info("睡眠10S");
+                Thread.sleep(10000L);
+                log.info("睡眠结束");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        return HygResponse.Success("结束");
 
     }
 
+    @Override
+    public HygResponse demo01() {
+        this.testAsync();
 
+        return HygResponse.Success();
+    }
 }

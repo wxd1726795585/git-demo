@@ -6,8 +6,10 @@ import com.example.base.BusinessException;
 import com.example.bean.Student;
 import com.example.collect.utils.ExcelUtils;
 import com.example.docx.WordTemplate;
+import com.example.req.HealthAssessmentItemDto;
 import com.example.req.InvoiceApprovalReq;
 import com.example.res.ApiH5SignCallbackRes;
+import com.example.service.AllKindsTestService;
 import com.example.utils.ExportExcelUtil;
 import com.example.utils.PdfUtils;
 import com.service.TestService;
@@ -35,6 +37,8 @@ public class TestController {
     private StringRedisTemplate redisTemplate;
     @Autowired(required = false)
     private TestService testService;
+    @Autowired
+    private AllKindsTestService allKindsTestService;
 
 
     /**
@@ -66,96 +70,12 @@ public class TestController {
     }
 
 
-    @GetMapping("/demo02")
+    @PostMapping("/demo02")
     public HygResponse demo01() {
-        Map<Object, Object> ceshide = redisTemplate.opsForHash().entries("ceshide");
-        Set<Object> set = ceshide.keySet();
-        boolean flag = set.contains("你好啊");
-        return HygResponse.Success(flag);
-        //Set<String> keys = redisTemplate.keys("*" + READING_STATE_FLAG + "*");
-        //Long delete = redisTemplate.delete(keys);
-        //System.out.println("删除个数" + delete);
-        /*String date_test = redisTemplate.opsForValue().get("DATE_TEST");
-        String[] split = date_test.split("~");
-        System.out.println(split[0]);
-        System.out.println(split[1]);*/
-        //Set<String> keys = redisTemplate.keys("*" + READING_STATE_FLAG + "*");
-        //System.out.println(keys);
-        //System.out.println(keys.size());
-        //for (String k:
-        //     keys) {
-        //    Boolean delete = redisTemplate.delete(k);
-        //    System.out.println(delete);
-        //}
-        /*redisTemplate.opsForHash().put("a","b",String.valueOf(1112.550));
-        String o = (String) redisTemplate.opsForHash().get("a", "b");
-        BigDecimal bigDecimal = new BigDecimal(o);
-        System.out.println(bigDecimal);*/
-        //2022-07-08 练习redis的常用api
-        //-------------String类型的
-        /*redisTemplate.opsForValue().set("name","wangxiangdong");
-        String name = redisTemplate.opsForValue().get("name");
-        log.info("获取name的值:{}",name);
-        //批量插入
-        HashMap<String, String> map = new HashMap<>();
-        map.put("gender","男");
-        map.put("age","24");
-        redisTemplate.opsForValue().multiSet(map);
-        log.info("获取gender值:{},获取年龄的值:{}",redisTemplate.opsForValue().get("gender"),redisTemplate.opsForValue().get("age"));
-        //插入时候判断是否有该值  没有则插入 返回true 有则返回false
-        Boolean name1 = redisTemplate.opsForValue().setIfAbsent("name", "1");
-        System.out.println(name1);
-        //自增 或者 自减
-        redisTemplate.opsForValue().set("decrement","10");
-        redisTemplate.opsForValue().set("increment","10");
-        redisTemplate.opsForValue().decrement("decrement");
-        redisTemplate.opsForValue().increment("decrement");
-
-
-        //-----------List类型的
-        //往左边插入数据
-        redisTemplate.opsForList().leftPush("test","1");
-        //往右边插入数据
-        redisTemplate.opsForList().rightPush("test","2");
-        //往左边批量插入数据
-        redisTemplate.opsForList().leftPushAll("test","3","4","5");
-        redisTemplate.opsForList().leftPushAll("test",Arrays.asList("6","7","8"));
-        //往右边批量插入数据
-        redisTemplate.opsForList().rightPushAll("test","10","11","12");
-        redisTemplate.opsForList().rightPushAll("test",Arrays.asList("13","14","15"));
-        //弹出左边的第一个数据
-        String leftPop = redisTemplate.opsForList().leftPop("test");
-        log.info("弹出左边的第一个数据:{}",leftPop);
-        //弹出右边的第一个数据
-        String rightPop = redisTemplate.opsForList().rightPop("test");
-        log.info("弹出右边的第一个数据:{}",rightPop);
-        //获取list集合长度
-        redisTemplate.opsForList().size("test");
-
-        //-----------Hash类型的
-        //插入数据
-        redisTemplate.opsForHash().put("hash","name","王祥栋");
-        //获取数据
-        String hashName =(String) redisTemplate.opsForHash().get("hash", "name");
-        log.info("获取的name名称:{}",hashName);
-        //批量插入数据
-        HashMap<String, String> map1 = new HashMap<>();
-        map1.put("gender","男");
-        map1.put("age","24");
-        redisTemplate.opsForHash().putAll("hash",map1);
-        //获取长度
-        Long hash = redisTemplate.opsForHash().size("hash");
-        log.info("hash的长度:{}",hash);
-        //获取所有的键值对
-        Map<Object, Object> hash1 = redisTemplate.opsForHash().entries("hash");
-        log.info("获取所有的键值对:{}",hash1);
-        //获取所有的KEY值
-        Set<Object> hash2 = redisTemplate.opsForHash().keys("hash");
-        log.info("获取所有的KEY值:{}",hash2);
-        //获取所有的value值
-        List<Object> hash3 = redisTemplate.opsForHash().values("hash");
-        log.info("获取所有的value值:{}",hash3);*/
-        //redisTemplate.opsForValue().set("test","10");
+        for (int i = 0; i < 10; i++) {
+            allKindsTestService.testAsync();
+        }
+        return HygResponse.Success("222");
     }
 
     @PostMapping("/test008")
