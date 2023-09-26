@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -23,20 +24,12 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class ThreadServiceImpl {
 
     public static void main(String[] args) {
-        //1. 提供指定线程数量的线程池
-        ExecutorService service = Executors.newFixedThreadPool(10);
-        ThreadPoolExecutor service1 = (ThreadPoolExecutor) service;
-        Future<?> submit = service1.submit(new Runnable() {
-            @Override
-            public void run() {
-                int i = 1 / 0;
-            }
+        HashMap<Object, Object> hashMap = new HashMap<>();
+        hashMap.forEach((x,y)->{
+            String key = (String) x;
+            String value =(String) y;
+
         });
-        try {
-            Object o = submit.get();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
 
 
     }
