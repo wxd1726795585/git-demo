@@ -19,6 +19,7 @@ public class Consumer {
     public static void main(String[] args) throws Exception{
         //消费者  指定组名
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("group1");
+        System.out.println("111111");
         //指定nameserver地址
         consumer.setNamesrvAddr("192.168.2.130:9876;192.168.2.131:9876");
         //订阅主题和tag
