@@ -129,11 +129,7 @@
             <artifactId>quartz</artifactId>
             <version>2.3.0</version>
         </dependency>
-        <dependency>
-            <groupId>com.aspose.words</groupId>
-            <artifactId>aspose-jacob</artifactId>
-            <version>14.9.0.0</version>
-        </dependency>
+
         <dependency>
             <groupId>com.lowagie</groupId>
             <artifactId>itext</artifactId>
@@ -240,6 +236,12 @@
             <artifactId>ooxml-schemas</artifactId>
             <version>1.1</version>
         </dependency>
+        <dependency>
+            <groupId>com.aspose</groupId>
+            <artifactId>aspose-words</artifactId>
+            <version>15.8.0</version>
+        </dependency>
+
 
     </dependencies>
 
