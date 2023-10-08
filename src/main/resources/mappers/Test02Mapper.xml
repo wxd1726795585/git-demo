@@ -163,4 +163,16 @@
                c.gender gender
         FROM copy c
     </select>
+
+    <update id="updateById">
+        update copy
+        set `name` ='李四'
+        where id =#{id}
+    </update>
+
+    <select id="selectById" resultType="map">
+        select *
+        from copy
+        where id=#{id}
+    </select>
 </mapper>

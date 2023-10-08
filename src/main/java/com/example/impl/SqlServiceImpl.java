@@ -174,6 +174,17 @@ public class SqlServiceImpl implements SqlService {
         List<CopyEntity> list = test02Mapper.selectCopyList();
         return HygResponse.Success(list);
     }
+
+
+    @Override
+    @Transactional(rollbackFor = Exception.class, timeout = 30, isolation = Isolation.READ_COMMITTED)
+    public HygResponse test05Sql(String id) {
+        log.info("修改的是id为:-{}-的数据", id);
+        Integer count = test02Mapper.updateById(id);
+        log.info("修改成功条数:-{}-",count);
+        List<Map<String,Object>> list = test02Mapper.selectById(id);
+        return HygResponse.Success(list);
+    }
 }
 
 @AllArgsConstructor

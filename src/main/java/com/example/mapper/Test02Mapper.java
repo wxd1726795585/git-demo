@@ -115,4 +115,8 @@ public interface Test02Mapper {
     int insertCopy(String id);
 
     List<CopyEntity> selectCopyList();
+
+    Integer updateById(@Param("id") String id);
+
+    List<Map<String,Object>> selectById(@Param("id") String id);
 }

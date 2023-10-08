@@ -101,6 +101,16 @@ public class SqlController {
         return service.test04Sql(id);
     }
 
+    /**
+     * 测试sql---v5
+     *
+     * @return
+     */
+    @GetMapping("/test05/sql")
+    public HygResponse test05Sql(@RequestParam("id")String id) {
+        return service.test05Sql(id);
+    }
+
 
 
 

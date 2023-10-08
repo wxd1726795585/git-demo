@@ -1,12 +1,10 @@
 package com.example.controller;
 
+import com.example.HygResponse;
 import com.example.impl.Test02ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,6 +19,12 @@ import java.util.List;
 @Slf4j
 public class Test02Controller {
     private final Test02ServiceImpl test02Service;
+
+    @GetMapping("/start")
+    public HygResponse start() {
+        return HygResponse.Success("start.....");
+    }
+
     /**
      * 批量增加数据
      */
@@ -33,33 +37,30 @@ public class Test02Controller {
      * 批量修改数据
      */
     @PostMapping("/bulk/changes")
-    public void bulkChanges(){
+    public void bulkChanges() {
         test02Service.bulkChanges();
     }
+
     @PostMapping("/update/moreData")
-    public void updateMoreData(){
+    public void updateMoreData() {
         test02Service.updateMoreData();
     }
 
     @PostMapping("/selectDemo")
-    public void selectDemo(@RequestBody List<String> list){
+    public void selectDemo(@RequestBody List<String> list) {
         test02Service.selectDemo(list);
     }
 
 
     @PostMapping("/test/mybatis")
-    public void testMybatis(){
+    public void testMybatis() {
         test02Service.testMybatis();
     }
 
     @PostMapping("/test/selectCount")
-    public void selectCount(@RequestParam("gender")String gender){
+    public void selectCount(@RequestParam("gender") String gender) {
         test02Service.selectCount(gender);
     }
-
-
-
-
 
 
 }

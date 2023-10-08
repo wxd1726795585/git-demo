@@ -35,4 +35,6 @@ public interface SqlService {
      * @return
      */
     HygResponse test04Sql(String id);
+
+    HygResponse test05Sql(String id);
 }
