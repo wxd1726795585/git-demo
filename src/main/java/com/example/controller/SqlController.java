@@ -87,7 +87,7 @@ public class SqlController {
      * @return
      */
     @PostMapping("/test03/sql")
-    public HygResponse test03Sql(@RequestParam("id")String id) {
+    public HygResponse test03Sql(@RequestParam("id") String id) {
         return service.test03Sql(id);
     }
 
@@ -97,7 +97,7 @@ public class SqlController {
      * @return
      */
     @GetMapping("/test04/sql")
-    public HygResponse test04Sql(@RequestParam("id")String id) {
+    public HygResponse test04Sql(@RequestParam("id") String id) {
         return service.test04Sql(id);
     }
 
@@ -107,12 +107,30 @@ public class SqlController {
      * @return
      */
     @GetMapping("/test05/sql")
-    public HygResponse test05Sql(@RequestParam("id")String id) {
+    public HygResponse test05Sql(@RequestParam("id") String id) {
         return service.test05Sql(id);
     }
 
 
+    /**
+     * 测试sql---v6
+     *
+     * @return
+     */
+    @GetMapping("/test06/sql")
+    public HygResponse test06Sql() {
+        return service.test06Sql();
+    }
 
+    /**
+     * 测试sql---v7
+     *
+     * @return
+     */
+    @GetMapping("/test07/sql")
+    public HygResponse test07Sql(@RequestParam("cooperatorId")String cooperatorId) {
+        return service.test07Sql(cooperatorId);
+    }
 
 
     /**
@@ -122,7 +140,7 @@ public class SqlController {
      */
     @GetMapping("/test01/params")
     public HygResponse test01Params() {
-        Long delete = stringRedisTemplate.opsForHash().delete("1", "2","3");
+        Long delete = stringRedisTemplate.opsForHash().delete("1", "2", "3");
         System.out.println(delete);
         //
         //AlipayClient alipayClient = new DefaultAlipayClient(URL, APP_ID, APP_PRIVATE_KEY, FORMAT, CHARSET, ALIPAY_PUBLIC_KEY, SIGN_TYPE);

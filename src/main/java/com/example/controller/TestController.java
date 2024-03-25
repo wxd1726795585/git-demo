@@ -6,6 +6,7 @@ import com.example.base.BusinessException;
 import com.example.bean.Student;
 import com.example.collect.utils.ExcelUtils;
 import com.example.docx.WordTemplate;
+import com.example.req.Demo02Req;
 import com.example.req.HealthAssessmentItemDto;
 import com.example.req.InvoiceApprovalReq;
 import com.example.res.ApiH5SignCallbackRes;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.io.*;
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
@@ -75,6 +77,12 @@ public class TestController {
         for (int i = 0; i < 10; i++) {
             allKindsTestService.testAsync();
         }
+        return HygResponse.Success("222");
+    }
+
+    @PostMapping("/demo03")
+    public HygResponse demo03(@RequestBody @Valid Demo02Req demo02Req) {
+        log.info("参数:{}", demo02Req);
         return HygResponse.Success("222");
     }
 

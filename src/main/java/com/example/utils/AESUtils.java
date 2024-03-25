@@ -1,18 +1,89 @@
 package com.example.utils;
+import com.example.base.BusinessException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.Base64Utils;
+import org.springframework.util.StringUtils;
+import sun.misc.BASE64Decoder;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
-
+import java.util.ArrayList;
+import java.util.List;
+@Slf4j
 public class AESUtils {
 
     private static final String ALGORITHM = "AES";
 
     private static final String TRANSFORMATION = "AES/ECB/PKCS5Padding";
+
+    public static void main(String[] args) {
+        List<String> stringList = decryptUtil("xHuAnkSFpYl+qda+2zRW3Q==", "x5MnqjiSQsRlHizE5suh6A==", "4PFsimcPLmbhHp1D9SazhQ==");
+        System.out.println(stringList);
+    }
+
+    public static List<String> decryptUtil(String... param) {
+        List<String> decryptParam = new ArrayList<>();
+        try {
+            for (String str : param) {
+                decryptParam.add(decryptOfMysql(str, "*&($UHNOPW#890ny"));
+            }
+        } catch (Exception e) {
+            log.error("数据库解密失败", e);
+            throw new BusinessException("解密敏感信息异常");
+        }
+        return decryptParam;
+
+    }
+    /**
+     * java使用AES加密解密 AES-128-ECB加密
+     * 与mysql数据库aes加密算法通用
+     * 数据库aes加密解密
+     * -- 加密
+     * SELECT to_base64(AES_ENCRYPT('www.gowhere.so','jkl;POIU1234++=='));
+     * -- 解密
+     * SELECT AES_DECRYPT(from_base64('Oa1NPBSarXrPH8wqSRhh3g=='),'jkl;POIU1234++==');
+     *
+     * @author 836508
+     */
+    public static String decryptOfMysql(String sSrc, String sKey) throws Exception {
+        if (StringUtils.isEmpty(sSrc)) {
+            return "";
+        }
+        try {
+            // 判断Key是否正确
+            if (StringUtils.isEmpty(sKey)) {
+                log.error("密钥为空");
+                return "";
+            }
+            // 判断Key是否为16位
+            if (sKey.length() != 16) {
+                log.error("Key长度不是16位");
+                return "";
+            }
+            byte[] raw = sKey.getBytes(StandardCharsets.UTF_8);
+            SecretKeySpec skeySpec = new SecretKeySpec(raw, ALGORITHM);
+            Cipher cipher = Cipher.getInstance(TRANSFORMATION);
+            cipher.init(Cipher.DECRYPT_MODE, skeySpec);
+            //先用base64解密
+            byte[] encrypted1 = new BASE64Decoder().decodeBuffer(sSrc);
+            try {
+                byte[] original = cipher.doFinal(encrypted1);
+                String originalString = new String(original, StandardCharsets.UTF_8);
+                return originalString;
+            } catch (Exception e) {
+                log.error("解密失败:e:", e);
+                return "";
+            }
+        } catch (Exception ex) {
+            log.error("解密失败:e:", ex);
+            return "";
+        }
+    }
 
     /**
      * 解密

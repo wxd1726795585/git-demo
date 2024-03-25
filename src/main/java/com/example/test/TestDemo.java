@@ -5,16 +5,21 @@ import lombok.Data;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpHead;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.springframework.util.CollectionUtils;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.Random;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * \* Created with WXD.
@@ -23,11 +28,52 @@ import java.util.Random;
  * \* @author 王祥栋
  */
 @Data
-public class TestDemo  {
+public class TestDemo {
+    private static final List<String> REGION_SUFFIX = Arrays.asList("(市辖区)", "（市辖区）");
 
-    public static void test002(){
-        int i = 1/0;
+    public static void main(String[] args) {
+        String str1= "222222";
+       String str = "11111" + (str1.contains("2")?"3":str1);
+        System.out.println(str);
+        }
+
+
+
+
+    public static int findLastChineseCharacterIndex(String str) {
+        // 正则表达式匹配汉字
+        String regex = "[\u4e00-\u9fa5]";
+
+        // 从字符串末尾开始查找最后一个汉字的索引
+        for (int i = str.length() - 1; i >= 0; i--) {
+            if (String.valueOf(str.charAt(i)).matches(regex)) {
+                return i;
+            }
+        }
+
+        // 如果字符串中没有汉字，则返回-1
+        return -1;
     }
+
+    public static String processParam(String param1, String param2) {
+        if (param1.matches(".*\\d[a-zA-Z]$")) { // 如果以数字加字母结尾
+            String lastChar = param1.substring(param1.length() - 1);
+            return param2 + lastChar;
+        } else if (param1.matches(".*[a-zA-Z]$")) { // 如果以字母结尾
+            String lastChar = param1.substring(param1.length() - 1);
+            return param2 + lastChar;
+        } else {
+            return param2;
+        }
+    }
+
+
+
+
+    public static void test002() {
+        int i = 1 / 0;
+    }
+
     public static int upload(String strURL, File[] allFile) {
         int status = 200;
 

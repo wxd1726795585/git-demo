@@ -24,7 +24,7 @@ public class DemoApplication {
      */
     @Bean
     public AsyncTaskExecutor healthResultExportExecutor() {
-        return new AsyncThreadPoolConfig(10, 10, 9999, 10,
+        return new AsyncThreadPoolConfig(1, 1, 9999, 10,
                 "async-healthResultExport-thread-pool").getThreadPool();
     }
 

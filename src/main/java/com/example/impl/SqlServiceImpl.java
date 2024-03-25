@@ -3,6 +3,7 @@ package com.example.impl;
 import com.BusinessCode;
 import com.example.HygResponse;
 import com.example.entity.CopyEntity;
+import com.example.entity.UpperAgentRes;
 import com.example.mapper.Test02Mapper;
 import com.example.req.PersonReq;
 import com.example.service.SqlService;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -170,7 +172,6 @@ public class SqlServiceImpl implements SqlService {
     @Override
     @Transactional(timeout = 30, rollbackFor = Exception.class, isolation = Isolation.READ_COMMITTED)
     public HygResponse test04Sql(String id) {
-        int count = test02Mapper.insertCopy(id);
         List<CopyEntity> list = test02Mapper.selectCopyList();
         return HygResponse.Success(list);
     }
@@ -181,9 +182,48 @@ public class SqlServiceImpl implements SqlService {
     public HygResponse test05Sql(String id) {
         log.info("修改的是id为:-{}-的数据", id);
         Integer count = test02Mapper.updateById(id);
-        log.info("修改成功条数:-{}-",count);
-        List<Map<String,Object>> list = test02Mapper.selectById(id);
+        log.info("修改成功条数:-{}-", count);
+        List<Map<String, Object>> list = test02Mapper.selectById(id);
         return HygResponse.Success(list);
+    }
+
+    /**
+     * 测试sql---v6
+     *
+     * @return
+     */
+    @Override
+    public HygResponse test06Sql() {
+        //Integer counts = test02Mapper.selectCopyCounts();
+        //CopyEntity copyEntity = test02Mapper.getCopyEntityById();
+        List<CopyEntity> copyEntityList = test02Mapper.getCopyEntityList();
+        if (Objects.isNull(copyEntityList)) {
+            log.info("是空的");
+        } else {
+            log.info("不是空的");
+        }
+        log.info("返回的数据结果:-{}-", copyEntityList);
+        return HygResponse.Success(copyEntityList);
+    }
+
+    /**
+     * 测试sql---v7
+     *
+     * @return
+     */
+    @Override
+    public HygResponse test07Sql(String cooperatorId) {
+        List<UpperAgentRes> agentList = test02Mapper.doFindUpperAgentIds(cooperatorId);
+        if (Objects.isNull(agentList)){
+            return HygResponse.Error("返回结果为null");
+        }
+
+        if (CollectionUtils.isEmpty(agentList)) {
+            return HygResponse.Error(BusinessCode.WARN, "商户不存在");
+        }
+        UpperAgentRes upperAgentRes = agentList.get(0);
+        log.info("属性值:{}",upperAgentRes);
+        return HygResponse.Success(agentList);
     }
 }
 

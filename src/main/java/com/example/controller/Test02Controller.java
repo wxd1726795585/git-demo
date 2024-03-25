@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.example.HygResponse;
 import com.example.impl.Test02ServiceImpl;
+import com.example.req.StudentInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -60,6 +61,18 @@ public class Test02Controller {
     @PostMapping("/test/selectCount")
     public void selectCount(@RequestParam("gender") String gender) {
         test02Service.selectCount(gender);
+    }
+
+    @PostMapping("/test/form/list")
+    public void testFormList(StudentInfo studentInfo) {
+        log.info("学生信息:-{}-", studentInfo);
+    }
+
+
+    @PostMapping("/test/view/list")
+    public void testFormList(@RequestBody List<String> list) {
+        log.info("集合数据:-{}-", list);
+
     }
 
 

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.entity.CopyEntity;
 import com.example.entity.StudentEntity;
 import com.example.entity.TradeMqConsumerLog;
+import com.example.entity.UpperAgentRes;
 import com.example.req.PersonReq;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -119,4 +120,19 @@ public interface Test02Mapper {
     Integer updateById(@Param("id") String id);
 
     List<Map<String,Object>> selectById(@Param("id") String id);
+
+    Integer selectCopyCounts();
+
+    CopyEntity getCopyEntityById();
+
+    List<CopyEntity> getCopyEntityList();
+
+    /**
+     * 查询商户所有关联代理
+     *
+     * @param cooperatorId 商户ID
+     * @return List<UpperAgentRes>
+     */
+    List<UpperAgentRes> doFindUpperAgentIds(@Param("cooperatorId") String cooperatorId);
+
 }

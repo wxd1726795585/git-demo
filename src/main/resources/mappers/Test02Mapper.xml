@@ -167,12 +167,46 @@
     <update id="updateById">
         update copy
         set `name` ='李四'
-        where id =#{id}
+        where id = #{id}
     </update>
 
     <select id="selectById" resultType="map">
         select *
         from copy
-        where id=#{id}
+        where id = #{id}
+    </select>
+
+    <select id="selectCopyCounts" resultType="integer">
+        SELECT count(*)
+        FROM `copy`
+        where id = '2'
+    </select>
+
+    <select id="getCopyEntityById" resultType="com.example.entity.CopyEntity">
+        select id     as id,
+               name   as name,
+               gender as gender
+        from `copy`
+        where id = '2'
+    </select>
+
+    <select id="getCopyEntityList" resultType="com.example.entity.CopyEntity">
+        select id     as id,
+               name   as name,
+               gender as gender
+        from `copy`
+        where id = '2'
+    </select>
+
+    <!--查询商户所有关联代理-->
+    <select id="doFindUpperAgentIds" resultType="com.example.entity.UpperAgentRes">
+        SELECT c2.cooperator_id AS agentIdOne,
+               c3.cooperator_id AS agentIdTwo,
+               c4.cooperator_id AS agentIdThree
+        FROM tbl_cooperator_conf c1
+                 LEFT JOIN tbl_cooperator_conf c2 ON c1.upper_agent_id = c2.cooperator_id
+                 LEFT JOIN tbl_cooperator_conf c3 ON c2.upper_agent_id = c3.cooperator_id
+                 LEFT JOIN tbl_cooperator_conf c4 ON c3.upper_agent_id = c4.cooperator_id
+        WHERE c1.cooperator_id = #{cooperatorId}
     </select>
 </mapper>

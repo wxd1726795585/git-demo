@@ -37,4 +37,13 @@ public interface SqlService {
     HygResponse test04Sql(String id);
 
     HygResponse test05Sql(String id);
+
+    /**
+     * 测试sql---v6
+     *
+     * @return
+     */
+    HygResponse test06Sql();
+
+    HygResponse test07Sql(String cooperatorId);
 }
