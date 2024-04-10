@@ -29,6 +29,7 @@ import javax.validation.Valid;
 import java.io.*;
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 
 @RestController
@@ -59,16 +60,8 @@ public class TestController {
 
     @GetMapping("/zhuanhuan")
     public void demo009() throws Exception {
-        ApiH5SignCallbackRes apiH5SignCallbackRes = new ApiH5SignCallbackRes();
-        apiH5SignCallbackRes.setCallbackUrl("https://wmpos.marubi.cn/k/integration/crm/hyg/signing-callback");
-        apiH5SignCallbackRes.setC("wmbh");
-        apiH5SignCallbackRes.setAgreeState("2");
-        apiH5SignCallbackRes.setAgreeDesc("签约成功");
-        apiH5SignCallbackRes.setTimes(0);
-        apiH5SignCallbackRes.setWorkerId("W1078348279688736768");
-        apiH5SignCallbackRes.setWorkerMobile("15031309551");
-        apiH5SignCallbackRes.setCooperatorId("C954411691225923584");
-        redisTemplate.opsForHash().put("H5_SIGN_OAPI_CALLBACK", "W1078348279688736768", JSON.toJSONString(apiH5SignCallbackRes));
+        String o = (String) redisTemplate.opsForHash().get("1", "1");
+        System.out.println(o);
     }
 
 

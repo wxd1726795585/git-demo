@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
  */
 public class ThreadTest extends Thread {
 
+
     private static final Integer CORE_POOL_SIZE = 10;
     private static final Integer MAX_POOL_SIZE = 20;
     private static final Long KEEP_ALIVE_TIME = 20L;
