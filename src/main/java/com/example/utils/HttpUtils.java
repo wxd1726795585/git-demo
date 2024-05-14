@@ -1,6 +1,9 @@
 package com.example.utils;
 
 import lombok.extern.slf4j.Slf4j;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ResponseHandler;
@@ -14,9 +17,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import org.omg.CORBA.Request;
 
-import javax.xml.ws.Response;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -29,6 +30,9 @@ public class HttpUtils {
 
 
     private static final String ENCODING = "UTF-8";
+
+    private static final OkHttpClient okHttpClient = new OkHttpClient().newBuilder().connectTimeout(10, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS).build();
 
 
     public static String post(String url, Map<String, String> paramsMap) {
@@ -60,6 +64,32 @@ public class HttpUtils {
             }
         }
         return responseText;
+    }
+    /**
+     * 同步GET
+     *
+     * @param url url
+     * @return String
+     * @throws IOException IOException
+     */
+    public static String get(String url) throws IOException {
+        okhttp3.Request request = new Request.Builder().url(url).get().build();
+        Response response = execute(request);
+        if (response.isSuccessful()) {
+            return response.body().string();
+        } else {
+            throw new IOException("Unexpected code " + response);
+        }
+    }
+    /**
+     * 通用同步请求
+     *
+     * @param request 请求
+     * @return {@link Response}
+     * @throws IOException IOException
+     */
+    public static Response execute(Request request) throws IOException {
+        return okHttpClient.newCall(request).execute();
     }
 
     public static String get(String url, Map<String, String> paramsMap) {
