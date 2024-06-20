@@ -19,7 +19,7 @@ public class DownloadFileUtil {
 
     public static void main(String[] args){
         //从excel读取要下载的文件名称和地址
-        String pathName = "D:\\download\\任务确认单.xls";
+        String pathName = "D:\\download\\结算明细表的数据.xls";
         //下载完成好保存的目录
         String afterPathName = "D:\\download";
         String url = "https://di-deal.hvyogo.com/web-deal/common/file/download?key=";

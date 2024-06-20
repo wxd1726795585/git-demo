@@ -7,9 +7,7 @@ import com.example.bean.Student;
 import com.example.collect.utils.ExcelUtils;
 import com.example.docx.WordTemplate;
 import com.example.req.Demo02Req;
-import com.example.req.HealthAssessmentItemDto;
 import com.example.req.InvoiceApprovalReq;
-import com.example.res.ApiH5SignCallbackRes;
 import com.example.service.AllKindsTestService;
 import com.example.utils.ExportExcelUtil;
 import com.example.utils.PdfUtils;
@@ -27,9 +25,11 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.*;
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 
 
 @RestController
@@ -60,8 +60,11 @@ public class TestController {
 
     @GetMapping("/zhuanhuan")
     public void demo009() throws Exception {
-        String o = (String) redisTemplate.opsForHash().get("1", "1");
-        System.out.println(o);
+        redisTemplate.opsForHash().put(READING_STATE_FLAG, "1", "2");
+        redisTemplate.opsForHash().entries(READING_STATE_FLAG).forEach((key, value) -> {
+            System.out.println("key:" + key);
+            System.out.println("value:" + value);
+        });
     }
 
 

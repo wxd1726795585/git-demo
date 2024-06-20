@@ -15,7 +15,8 @@ import java.util.List;
  */
 public class Test0428 {
 
-
+    public static String TEMPLATE_62 = "【慧用工】批量开票ID:%KEY_CONTENT%存在发票匹配异常，请尽快处理。";
+    public static String CONTENT = "%KEY_CONTENT%";
     // 地球半径，单位是千米
     private static final double EARTH_RADIUS = 6371.0;
 
@@ -52,7 +53,13 @@ public class Test0428 {
      * @param args
      */
     public static void main(String[] args) {
-        test();
+        try {
+            int i =1/0;
+
+        }catch (Exception e){
+            throw e;
+        }
+
     }
 
     public  static String test(){
